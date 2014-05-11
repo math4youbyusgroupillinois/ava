@@ -2,10 +2,10 @@ from fabric.api import local
 from fabric.api import lcd, local
 
 def deploy():
-    with lcd('/home/ladynerd/deploy/axiom/'):
+    with lcd('/home/ladynerd/deploy/ava/'):
 
         # With git...
-        local('git pull /home/ladynerd/projects/axiom/')
+        local('git pull /home/ladynerd/projects/ava/')
 
 
 def prepare_deployment():
