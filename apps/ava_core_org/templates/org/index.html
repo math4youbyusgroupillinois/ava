@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}AVA - Visibly More Secure{% endblock %}
+{% block mainpage %}
+
+<h2>[organisation] .all</h2>
+
+{% if org_list %}
+    <table style="margin-left:auto;margin-right:auto">
+    {% for organisation in org_list %}
+    <tr>
+        <td class="left"><a href="/org/{{ organisation.id }}/view/">{{ organisation.name }}</a></td>
+        <td><a href="/org/{{ organisation.id }}/chart/">[organisation chart]</td>
+        <td><a href="/org/{{ organisation.id }}/update/">[update]</td>
+        <td><a href="/org/{{ organisation.id }}/delete/">[delete]</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No organisations are available.</p>
+{% endif %}
+
+{% endblock %}

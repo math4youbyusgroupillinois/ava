@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block mainpage %}
+
+
+            <h1 class="page-header">Welcome {{ user }}</h1>
+
+                <div class="row placeholders">
+                    <div class="col-xs-6 col-sm-3 placeholder">
+                        <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <h4>Projects</h4>
+                        <span class="text-muted"></span>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 placeholder">
+                        <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <h4>Organisations</h4>
+                        <span class="text-muted"></span>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 placeholder">
+                        <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <h4>People</h4>
+                        <span class="text-muted"></span>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 placeholder">
+                        <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <h4>Scheduled Tests</h4>
+                        <span class="text-muted"></span>
+                    </div>
+               </div>
+
+        <h2 class="sub-header">Current Projects &nbsp;
+            <a href='/project/new/'>[add project]</a></h2>
+    
+        <div class="table-responsive">      
+        {% if project_list %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                {% for project in project_list %}
+                    <tr>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.description }}</td>
+                        <td><a href="/project/{{ project.id }}/view/">[view]</td>
+                        <td><a href="/project/{{ project.id }}/update/">[update]</td>
+                        <td><a href="/project/{{ project.id }}/delete/">[delete]</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+             <p>No projects are available.</p>
+        {% endif %}
+        </div> <!-- end of table-responsive -->
+    </div> <!-- end of placeholders -->
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}AVA - Visibly More Secure{% endblock %}
+
+{% block mainpage %}
+
+<h2>[person] .{{ page_title }}</h2>
+<h3 class='left'>[basic details]</h3>
+        <form action="." method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+
+<br>
+	<h3 class=left>[associated identifiers]</h3>
+<br>
+
+            <fieldset>
+		        {{ identifier_form.management_form }}
+                {{ identifier_form.non_form_errors }}
+                {% for form in identifier_form %}
+                    {{ form.id }}
+                    <div class="inline {{ identifier_form.prefix }}">
+                        {{ form.description.errors }}
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                        {{ form.as_table }}
+                    </div>
+                {% endfor %}
+            
+            <input type="button" value="Add More" id="add_more">
+            <script>
+                $('#add_more').click(function() {
+                    cloneMore('div.inline:last', 'identifier_set');
+            });
+            </script>
+            
+            </fieldset
+	<br>
+    <input type="submit" value="{{ button_value }}" class="submit" />
+        </form>
+
+{% endblock %}

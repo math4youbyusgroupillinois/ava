@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}View Target Profile{% endblock %}
+{% block mainpage %}
+
+<div class="scrollblock block-merging">
+
+<h2>[person] {{ person.firstname }} {{ person.surname }}</h3>
+{% if person.identifier_set %}
+    <table style="margin-left:auto;margin-right:auto;">
+    {% for identifier in person.identifier_set.all %}
+    <tr>
+        <td>{{ identifier.identifier }}</td>
+        <td>{{ identifier.identifiertype }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>This person does not have any identifiers associated with them.</p>
+{% endif %}
+
+<a href="/people/{{ person.id }}/update/">[update]</a>
+<a href="/people/{{ person.id }}/delete/">[delete]</a>
+
+</div>
+{% endblock %}
+

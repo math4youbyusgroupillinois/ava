@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block mainpage %}
+
+<div class="page-header">
+             <h1>[project] .add</h1>
+</div>
+
+<h3>[project details]</h3>
+    
+         <form action="." method="post">
+             {% csrf_token %}
+             <table>
+                 {{ form.as_table }}
+             </table>
+             <br>
+             <input type="submit" value="Save Project" class="submit" />
+         </form>
+{% endblock %}
