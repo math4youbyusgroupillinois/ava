@@ -50,12 +50,14 @@ class ProjectCreateView(CreateView):
     form_class = ProjectForm
     page_title = 'add'
     button_value = 'add'
+    item_type = 'project'
 
     def get_context_data(self, **kwargs):
         context = super(ProjectCreateView, self).get_context_data(**kwargs)
         context['form'] = self.get_form_class()
         context['page_title'] = self.page_title
         context['button_value'] = self.button_value
+        context['item_type'] = self.item_type
         return context
 
     def form_valid(self, form):
@@ -72,10 +74,12 @@ class ProjectUpdateView(UpdateView):
     form_class = ProjectForm
     page_title = 'update'
     button_value = 'update'
+    item_type = 'project'
 
     def get_context_data(self, **kwargs):
         context = super(ProjectUpdateView, self).get_context_data(**kwargs)
         context['form'] = self.get_form_class()
         context['page_title'] = self.page_title
         context['button_value'] = self.button_value
+        context['item_type'] = self.item_type
         return context
