@@ -54,8 +54,8 @@ class ProjectCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super(ProjectCreateView, self).get_context_data(**kwargs)
         context['form'] = self.get_form_class()
-        context['page_title'] = self.get_page_title()
-        context['button_value'] = self.get_button_value()
+        context['page_title'] = self.page_title
+        context['button_value'] = self.button_value
         return context
 
     def form_valid(self, form):
@@ -76,6 +76,6 @@ class ProjectUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ProjectUpdateView, self).get_context_data(**kwargs)
         context['form'] = self.get_form_class()
-        context['page_title'] = self.get_page_title()
-        context['button_value'] = self.get_button_value()
+        context['page_title'] = self.page_title
+        context['button_value'] = self.button_value
         return context
