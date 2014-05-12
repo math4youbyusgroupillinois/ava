@@ -45,7 +45,8 @@ class ProjectDeleteView(DeleteView):
 
 class ProjectCreateView(CreateView):
     model = Project
-    template_name = 'project/project.html'
+    #template_name = 'project/project.html'
+    template_name = 'item.html'
     success_url = '/project/'
     form_class = ProjectForm
     page_title = 'add'
