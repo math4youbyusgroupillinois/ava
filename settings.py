@@ -5,19 +5,15 @@ import os, sys
 # = Directory Declaractions =
 # ===========================
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_PATH 		= os.path.dirname(os.path.abspath(__file__))
 CURRENT_DIR   		= os.path.dirname(__file__)
-TEMPLATE_DIRS 		= (os.path.join(CURRENT_DIR, 'templates'),)
+#TEMPLATE_DIRS 		= (os.path.join(CURRENT_DIR, 'templates'),)
 STATICFILES_DIRS 	= (os.path.join(CURRENT_DIR, 'static'),)
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
@@ -63,12 +59,6 @@ STATIC_ROOT = 'static/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -76,11 +66,6 @@ STATICFILES_FINDERS = (
 
 SECRET_KEY = 'de)a(rpoh-cd&q#e0eq_!0fh_va&8j!9*q5$t0jb0stf#-@pt+'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -108,8 +93,6 @@ LOCAL_APPS = (
     'apps.ava_core_auth',
     'apps.ava_core_org',
     'apps.ava_core_project',
-#    'module_email',
-#    'module_harvester',
     'apps.module_activedirectory',
     'apps.ava_core_people',
 )
@@ -144,6 +127,10 @@ LOGGING = {
         },
     }
 }
+
+
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
 
 
 try:
