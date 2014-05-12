@@ -90,7 +90,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'generic_django_project.urls'
+ROOT_URLCONF = 'urls'
 
 
 DEFAULT_APPS = (
