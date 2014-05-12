@@ -37,8 +37,10 @@
                 <li><a href="/">Dashboard</a></li>
                 <li><a href="/settings/">Settings</a></li>
                 <li><a href="/profile/">Profile</a></li>
-                <li><a href="/help/">Help</a></li> 
-                <li><a href="/accounts/logout/">Logout</a></li>
+                <li><a href="/help/">Help</a></li>
+                {% if self.request.user %} 
+                    <li><a href="/accounts/logout/">Logout</a></li>
+                {% endif %}
             </ul>
         </div><!--/.nav-collapse -->
     </div> <!-- end of container-fluid -->

@@ -93,7 +93,7 @@ LOCAL_APPS = (
     'apps.ava_core_auth',
     'apps.ava_core_org',
     'apps.ava_core_project',
-    'apps.module_activedirectory',
+    'apps.ava_core_ldap',
     'apps.ava_core_people',
 )
 
