@@ -38,6 +38,7 @@
                 <li><a href="/settings/">Settings</a></li>
                 <li><a href="/profile/">Profile</a></li>
                 <li><a href="/help/">Help</a></li>
+                <li>{{ self.request.user }}</li>
                 {% if not self.request.user == None %} 
                     <li><a href="/accounts/logout/">Logout</a></li>
                 {% endif %}
