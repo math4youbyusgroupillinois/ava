@@ -106,7 +106,6 @@ DEFAULT_APPS = (
 LOCAL_APPS = (
     'apps.ava_core',
     'apps.ava_core_auth',
-    'apps.ava_ref',
     'apps.ava_core_org',
     'apps.ava_core_project',
 #    'module_email',
