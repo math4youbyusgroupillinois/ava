@@ -14,8 +14,8 @@ class Project(TimeStampedModel):
 #    pass
 
 class ProjectTeamMembers(TimeStampedModel):
-    project=model.ForeignKey('Project')
-    user=model.ForeignKey(User)
+    project=models.ForeignKey('Project')
+    user=models.ForeignKey(User)
 
     def __unicode__(self):
         return self.user or u''
