@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from dh5bp.urls import urlpatterns as dh5bp_urls
 from django.contrib.auth.decorators import login_required
-from ava_core_project.views import DashboardView
+from apps.ava_core_project.views import DashboardView
 
 admin.autodiscover()
 
@@ -11,12 +11,12 @@ handler500 = 'dh5bp.views.server_error'
 
 urlpatterns = patterns('',
     url(r'^$', login_required(DashboardView.as_view()), name='index'),
-    url(r'^ava/', include('ava_core.urls')),
-    url(r'^accounts/', include('ava_core_auth.urls')),
-    url(r'^project/', include('ava_core_project.urls')),
-    url(r'^ldap/', include('module_activedirectory.urls')),
-    url(r'^people/', include('ava_core_people.urls')),
-    url(r'^org/', include('ava_core_org.urls')),
+    url(r'^ava/', include('apps.ava_core.urls')),
+    url(r'^accounts/', include('apps.ava_core_auth.urls')),
+    url(r'^project/', include('apps.ava_core_project.urls')),
+    url(r'^ldap/', include('apps.module_activedirectory.urls')),
+    url(r'^people/', include('apps.ava_core_people.urls')),
+    url(r'^org/', include('apps.ava_core_org.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 urlpatterns += dh5bp_urls
