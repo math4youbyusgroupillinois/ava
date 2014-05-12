@@ -15,7 +15,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
-            os.path.join(BASE_DIR,  'templates'),
+            os.path.join(BASE_DIR,  'ava.templates'),
             )
 
 DATABASES = {
