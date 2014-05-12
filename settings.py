@@ -14,6 +14,9 @@ STATICFILES_DIRS 	= (os.path.join(CURRENT_DIR, 'static'),)
 DEBUG = True
 TEMPLATE_DEBUG = True
 
+TEMPLATE_DIRS = (
+            join(BASE_DIR,  'templates'),
+            )
 
 DATABASES = {
     'default': {
