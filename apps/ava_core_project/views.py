@@ -14,6 +14,7 @@ class DashboardView(generic.ListView):
     context_object_name = 'project_list'
 
     def get_queryset(self):
+        print self.request.user
         self.request.session['project']=None 
         return Project.objects.filter(user=self.request.user)
 
