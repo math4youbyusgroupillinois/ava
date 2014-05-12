@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, join
 
 
 # ===========================
@@ -15,7 +15,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
-            join(BASE_DIR,  'templates'),
+            os.path.join(BASE_DIR,  'templates'),
             )
 
 DATABASES = {
