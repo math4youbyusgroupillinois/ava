@@ -104,15 +104,15 @@ DEFAULT_APPS = (
 
 
 LOCAL_APPS = (
-    'ava_core',
-    'ava_core_auth',
-    'ava_ref',
-    'ava_core_org',
-    'ava_core_project',
+    'apps.ava_core',
+    'apps.ava_core_auth',
+    'apps.ava_ref',
+    'apps.ava_core_org',
+    'apps.ava_core_project',
 #    'module_email',
 #    'module_harvester',
-    'module_activedirectory',
-    'ava_core_people',
+    'apps.module_activedirectory',
+    'apps.ava_core_people',
 )
 
 THIRD_PARTY_APPS = (
