@@ -6,8 +6,8 @@ from django.http import HttpResponseRedirect
 
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.models import User
-from ava_core_project.models import Project
-from ava_core_project.forms import  ProjectForm
+from apps.ava_core_project.models import Project
+from apps.ava_core_project.forms import  ProjectForm
 
 class DashboardView(generic.ListView):
     template_name = 'project/home.html'

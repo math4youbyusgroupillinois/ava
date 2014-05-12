@@ -3,9 +3,9 @@ from django.core.validators import validate_slug,validate_email
 from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
-from ava_core.models import TimeStampedModel,ReferenceModel
-from ava_core_people.models import Person
-from ava_core_project.models import Project
+from apps.ava_core.models import TimeStampedModel,ReferenceModel
+from apps.ava_core_people.models import Person
+from apps.ava_core_project.models import Project
 
 # CORE TABLES: TARGETS
 

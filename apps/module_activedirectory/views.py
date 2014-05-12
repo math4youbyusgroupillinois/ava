@@ -10,8 +10,8 @@ from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 
 from django.contrib.auth.models import User
-from module_activedirectory.models import ActiveDirectoryUser, ActiveDirectoryGroup, QueryParameters, ActiveDirectoryHelper
-from module_activedirectory.forms import  QueryParametersForm
+from apps.module_activedirectory.models import ActiveDirectoryUser, ActiveDirectoryGroup, QueryParameters, ActiveDirectoryHelper
+from apps.module_activedirectory.forms import  QueryParametersForm
 
 
 class ConfigurationIndexView(generic.ListView):

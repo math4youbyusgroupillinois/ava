@@ -1,6 +1,6 @@
 import datetime
 from haystack import indexes
-from ava_core_people.models import Person, Identifier
+from apps.ava_core_people.models import Person, Identifier
 
 
 class PersonIndex(indexes.SearchIndex, indexes.Indexable):

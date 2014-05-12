@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Form
 from django.forms.models import inlineformset_factory
-from ava_core_org.models import *
+from apps.ava_core_org.models import *
 
 
 class OrganisationForm(ModelForm):

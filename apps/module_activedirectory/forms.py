@@ -1,5 +1,5 @@
 from django.forms import ModelForm, Form
-from module_activedirectory.models import QueryParameters
+from apps.module_activedirectory.models import QueryParameters
 
 
 class QueryParametersForm(ModelForm):

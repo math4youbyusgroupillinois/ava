@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from module_activedirectory.models import ActiveDirectoryUser, ActiveDirectoryGroup,QueryParameters
+from apps.module_activedirectory.models import ActiveDirectoryUser, ActiveDirectoryGroup,QueryParameters
 
 admin.site.register(ActiveDirectoryUser)
 admin.site.register(ActiveDirectoryGroup)

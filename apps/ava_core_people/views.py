@@ -5,9 +5,9 @@ from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 
-from ava_core_people.models import Person, Identifier
-from ava_core_project.models import Project
-from ava_core_people.forms import IdentifierFormSet, PersonForm
+from apps.ava_core_people.models import Person, Identifier
+from apps.ava_core_project.models import Project
+from apps.ava_core_people.forms import IdentifierFormSet, PersonForm
 
 
 class PersonIndexView(generic.ListView):

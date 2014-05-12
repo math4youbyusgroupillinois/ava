@@ -6,10 +6,10 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.core.urlresolvers import reverse_lazy
 
-from ava_core_org.models import Organisation, OrganisationUnit
-from ava_core_org.forms import OrganisationForm, OrganisationUnitForm
+from apps.ava_core_org.models import Organisation, OrganisationUnit
+from apps.ava_core_org.forms import OrganisationForm, OrganisationUnitForm
 from django.contrib.auth.models import User
-from ava_core_org.forms import  *
+from apps.ava_core_org.forms import  *
 
 
 class OrganisationIndexView(generic.ListView):

@@ -4,8 +4,8 @@ from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
 
-from ava_core.models import TimeStampedModel
-from ava_core_project.models import Project
+from apps.ava_core.models import TimeStampedModel
+from apps.ava_core_project.models import Project
 
 # CORE TABLES: TARGETS
 

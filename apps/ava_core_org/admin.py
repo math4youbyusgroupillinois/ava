@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ava_core_org.models import *
+from apps.ava_core_org.models import *
 
 admin.site.register(OrganisationGroupType)
 admin.site.register(Industry)

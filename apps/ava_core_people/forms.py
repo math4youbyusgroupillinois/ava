@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Form
 from django.forms.models import inlineformset_factory
-from ava_core_people.models import Person,  Identifier
+from apps.ava_core_people.models import Person,  Identifier
 
 
 class PersonForm(ModelForm):

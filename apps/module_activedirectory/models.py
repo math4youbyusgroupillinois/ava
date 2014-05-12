@@ -1,6 +1,6 @@
 from django.db import models
-from ava_core.models import TimeStampedModel
-from ava_core_org.models import Organisation
+from apps.ava_core.models import TimeStampedModel
+from apps.ava_core_org.models import Organisation
 
 from django.contrib.auth.models import User
 from ldap import *

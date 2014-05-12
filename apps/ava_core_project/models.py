@@ -1,5 +1,5 @@
 from django.db import models
-from ava_core.models import TimeStampedModel, ReferenceModel, ConfigurationModel
+from apps.ava_core.models import TimeStampedModel, ReferenceModel, ConfigurationModel
 from django.contrib.auth.models import User
 
 class Project(TimeStampedModel):

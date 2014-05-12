@@ -4,7 +4,7 @@ from django.core.context_processors import csrf
 from django.shortcuts import render_to_response
 
 #Import a user registration form
-from ava_core_auth.forms import UserRegisterForm, UserLoginForm
+from apps.ava_core_auth.forms import UserRegisterForm, UserLoginForm
 
 # User Login View
 def user_login(request):
