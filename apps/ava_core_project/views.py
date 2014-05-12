@@ -40,12 +40,11 @@ class ProjectDetailView(generic.DetailView):
 
 class ProjectDeleteView(DeleteView):
     model = Project
-    template_name = 'project/project_confirm_delete.html'
+    template_name = 'confirm_delete.html'
     success_url = '/project/'
 
 class ProjectCreateView(CreateView):
     model = Project
-    #template_name = 'project/project.html'
     template_name = 'item.html'
     success_url = '/project/'
     form_class = ProjectForm
@@ -70,7 +69,7 @@ class ProjectCreateView(CreateView):
 
 class ProjectUpdateView(UpdateView):
     model = Project
-    template_name = 'project/project.html'
+    template_name = 'item.html'
     success_url = '/project/'
     form_class = ProjectForm
     page_title = 'update'

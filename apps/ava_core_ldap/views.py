@@ -98,17 +98,17 @@ class ConfigurationGetGroups(generic.ListView):
 
 class ConfigurationDeleteGroup(DeleteView):
         model = ActiveDirectoryGroup
-        template_name = 'ldap/item_confirm_delete.html'
+        template_name = 'confirm_delete.html'
         success_url = '/ldap/'
 
 class ConfigurationDeleteUser(DeleteView):
         model = ActiveDirectoryUser
-        template_name = 'ldap/item_confirm_delete.html'
+        template_name = 'confirm_delete.html'
         success_url = '/ldap/'
 
 class ConfigurationDeleteView(DeleteView):
         model = QueryParameters
-        template_name = 'ldap/ldap_confirm_delete.html'
+        template_name = 'confirm_delete.html'
         success_url = '/ldap/'
 
 class ConfigurationCreateView(CreateView):

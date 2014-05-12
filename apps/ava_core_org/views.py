@@ -35,7 +35,7 @@ class OrganisationDetailView(generic.DetailView):
 
 class OrganisationDeleteView(DeleteView):
     model = Organisation
-    template_name = 'org/organisation_confirm_delete.html'
+    template_name = 'confirm_delete.html'
     success_url = '/org/'
 
 

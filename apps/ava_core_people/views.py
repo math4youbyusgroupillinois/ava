@@ -33,13 +33,13 @@ class IdentifierUpdateView(UpdateView):
 
 class IdentifierDeleteView(DeleteView):
         model = Identifier
-        template_name = 'people/identifier_confirm_delete.html'
+        template_name = 'confirm_delete.html'
         success_url = '/people/'
 
 
 class PersonDeleteView(DeleteView):
         model = Person
-        template_name = 'people/person_confirm_delete.html'
+        template_name = 'confirm_delete.html'
         success_url = '/people/'
 
 
