@@ -48,26 +48,26 @@ class ProjectCreateView(CreateView):
     template_name = 'project/project.html'
     success_url = '/project/'
     form_class = ProjectForm
-    page_title = 'add'
-    button_value = 'add'
+    #page_title = 'add'
+    #button_value = 'add'
 
-    def get(self, request, *args, **kwargs):
-        self.object = None
-        self.request.session['project']=None 
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  page_title=self.page_title,button_value=self.button_value))
+    #def get(self, request, *args, **kwargs):
+    #    self.object = None
+     #   self.request.session['project']=None 
+     #   form_class = self.get_form_class()
+     #   form = self.get_form(form_class)
+     #   return self.render_to_response(
+     #       self.get_context_data(form=form,
+     #                             page_title=self.page_title,button_value=self.button_value))
 
-    def post(self, request, *args, **kwargs):
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+    #def post(self, request, *args, **kwargs):
+    #    self.object = None
+    #    form_class = self.get_form_class()
+    #    form = self.get_form(form_class)
+    #    if form.is_valid():
+    #        return self.form_valid(form)
+    #    else:
+    #        return self.form_invalid(form)
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -75,10 +75,10 @@ class ProjectCreateView(CreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-    def form_invalid(self, form):
-        return self.render_to_response(
-            self.get_context_data(form=form,
-                                  page_title=self.page_title,button_value=self.button_value))
+    #def form_invalid(self, form):
+    #    return self.render_to_response(
+    #        self.get_context_data(form=form,
+    #                              page_title=self.page_title,button_value=self.button_value))
 
 class ProjectUpdateView(UpdateView):
     model = Project
