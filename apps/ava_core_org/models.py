@@ -37,7 +37,8 @@ class OrganisationUnit (TimeStampedModel):
     office=models.ForeignKey('Office', null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=False)
     parent=models.ForeignKey('OrganisationUnit', null=True, blank=True);
-
+    #identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
+    
     def __unicode__(self):
         return self.name or u''
 
@@ -45,6 +46,7 @@ class OrganisationGroup (TimeStampedModel):
     name = models.CharField(max_length=100)
     grouptype = models.ForeignKey('OrganisationGroupType', null=False)
     organisation = models.ForeignKey('Organisation', null=False)
+    #identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
 
     def __unicode__(self):
         return self.name or u''

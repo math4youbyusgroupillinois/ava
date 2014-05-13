@@ -1,6 +1,7 @@
 from django.db import models
 from apps.ava_core.models import TimeStampedModel
 from apps.ava_core_org.models import Organisation
+#from apps.ava_core_identity.models import Identity
 
 from django.contrib.auth.models import User
 from ldap import *
@@ -40,6 +41,7 @@ class ActiveDirectoryUser(TimeStampedModel):
     memberOf = models.ManyToManyField('ActiveDirectoryGroup') 
     user = models.ForeignKey(User) 
     queryParameters = models.ForeignKey('QueryParameters')
+    #identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
 
     def __unicode__(self):
         return self.displayName or u''
@@ -58,6 +60,7 @@ class ActiveDirectoryGroup(TimeStampedModel):
     member = models.ManyToManyField('ActiveDirectoryUser')
     user = models.ForeignKey(User) 
     queryParameters = models.ForeignKey('QueryParameters')
+    #identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
 
     def __unicode__(self):
         return self.cn or u''

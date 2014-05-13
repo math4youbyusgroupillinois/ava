@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 from apps.ava_core.models import TimeStampedModel
 from apps.ava_core_project.models import Project
+#from apps.ava_core_identity.models import Identity
 
 # CORE TABLES: TARGETS
 
@@ -15,6 +16,7 @@ class Person(TimeStampedModel):
     surname = models.CharField(max_length=75,validators=[validate_slug])
     user = models.ForeignKey(User)
     project = models.ForeignKey('ava_core_project.Project')
+ #   identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
 
     def __unicode__(self):
         return self.firstname+" "+self.surname or u''
@@ -70,9 +72,9 @@ class Identifier(TimeStampedModel):
                 raise ValidationError('Identifier declared as USERNAME/SKYPE but does not contain a username or skype identifier')
         
 
-class ExtendedProfile(TimeStampedModel):
-    dob = models.DateField()
-    person = models.OneToOneField('Person', null=False)
-    title = models.CharField(max_length = 255)
-    notes = models.TextField()
+#class ExtendedProfile(TimeStampedModel):
+#    dob = models.DateField()
+#    person = models.OneToOneField('Person', null=False)
+#    title = models.CharField(max_length = 255)
+#    notes = models.TextField()
 

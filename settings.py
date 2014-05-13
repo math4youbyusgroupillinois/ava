@@ -98,6 +98,7 @@ LOCAL_APPS = (
     'apps.ava_core_project',
     'apps.ava_core_ldap',
     'apps.ava_core_people',
+#    'apps.ava_core_identity',
 )
 
 THIRD_PARTY_APPS = (
