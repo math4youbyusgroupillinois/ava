@@ -19,6 +19,7 @@
                         <th>Dump DN</th>
                         <th>Users</th>
                         <th>Groups</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,7 @@
                         <td>{{ parameters.dump_dn }}</td>
                         <td>{{ parameters.activedirectoryuser_set.count }}</td>
                         <td>{{ parameters.activedirectorygroup_set.count }}</td>
+                        <td><a href="/ldap/{{ parameters.id }}/getall/">[get all]</td>
                     </tr>
                 {% endfor %}
                 </tbody>
