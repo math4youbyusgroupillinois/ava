@@ -17,8 +17,6 @@
                         <th>User DN</th>
                         <th>Server</th>
                         <th>Dump DN</th>
-                        <th>Users</th>
-                        <th>Groups</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -28,9 +26,7 @@
                         <td>{{ parameters.user_dn }}</td>
                         <td>{{ parameters.server }}</td>
                         <td>{{ parameters.dump_dn }}</td>
-                        <td>{{ parameters.activedirectoryuser_set.count }}</td>
-                        <td>{{ parameters.activedirectorygroup_set.count }}</td>
-                        <td><a href="/ldap/{{ parameters.id }}/getall/">[get all]</td>
+                        <td><a href="/ldap/{{ parameters.id }}/view/">[view]</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -39,5 +35,6 @@
             <p>This organisation does not have any ldap configurations associated with it.</p>
         {% endif %}
         </div> <!-- end of table responsive -->
+
 {% endblock %}
 
