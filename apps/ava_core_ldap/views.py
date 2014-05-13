@@ -22,6 +22,30 @@ class ConfigurationIndexView(generic.ListView):
         """Return the last five created people."""
         return QueryParameters.objects.filter(user=self.request.user)
 
+class ConfigurationUserView(generic.ListView):
+    model = ActiveDirectoryUser
+    template_name = 'ldap/itemindex.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ConfigurationItemView, self).get_context_data(**kwargs)
+        config_pk = self.kwargs.get('pk')
+        if config_pk:
+            instance = get_object_or_404(QueryParameters, pk=config_pk)
+            context['ldap_user_list'] = ActiveDirectoryUser.objects.filter(queryParameters=instance,user=self.request.user)
+        return context
+
+class ConfigurationGroupView(generic.ListView):
+    model = ActiveDirectoryGroup
+    template_name = 'ldap/itemindex.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ConfigurationItemView, self).get_context_data(**kwargs)
+        config_pk = self.kwargs.get('pk')
+        if config_pk:
+            instance = get_object_or_404(QueryParameters, pk=config_pk)
+            context['ldap_group_list'] = ActiveDirectoryGroup.objects.filter(queryParameters=instance,user=self.request.user)
+        return context
+
 class ConfigurationItemView(generic.ListView):
     model = ActiveDirectoryUser
     template_name = 'ldap/itemindex.html'

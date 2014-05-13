@@ -28,9 +28,8 @@
                         <td>{{ parameters.user_dn }}</td>
                         <td>{{ parameters.server }}</td>
                         <td>{{ parameters.dump_dn }}</td>
-                        <td>{{ parameters.activedirectoryuser_set.count }}</td>
-                        <td>{{ parameters.activedirectorygroup_set.count }}</td>
-                        <td><a href="/ldap/{{ parameters.id }}/viewitems/">[view]</a></td>
+                        <td><a href="/ldap/{{ parameters.id }}/view/users/">{{ parameters.activedirectoryuser_set.count }}</a></td>
+                        <td><a href="/ldap/{{ parameters.id }}/view/groups/">{{ parameters.activedirectorygroup_set.count }}</a></td>
                         <td><a href="/ldap/{{ parameters.id }}/getall/">[import]</a></td>
                     </tr>
                 {% endfor %}
