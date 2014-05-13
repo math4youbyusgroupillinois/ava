@@ -14,7 +14,6 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th></th>
                         <th>User DN</th>
                         <th>Server</th>
                         <th>Dump DN</th>
@@ -26,7 +25,6 @@
                 <tbody>
                 {% for parameters in organisation.queryparameters_set.all %}
                     <tr>
-                        <td>{{ parameters }}</td>
                         <td>{{ parameters.user_dn }}</td>
                         <td>{{ parameters.server }}</td>
                         <td>{{ parameters.dump_dn }}</td>
