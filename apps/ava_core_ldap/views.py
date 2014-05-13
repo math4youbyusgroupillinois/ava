@@ -27,7 +27,7 @@ class ConfigurationUserView(generic.ListView):
     template_name = 'ldap/itemindex.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ConfigurationItemView, self).get_context_data(**kwargs)
+        context = super(ConfigurationUserView, self).get_context_data(**kwargs)
         config_pk = self.kwargs.get('pk')
         if config_pk:
             instance = get_object_or_404(QueryParameters, pk=config_pk)
@@ -39,7 +39,7 @@ class ConfigurationGroupView(generic.ListView):
     template_name = 'ldap/itemindex.html'
 
     def get_context_data(self, **kwargs):
-        context = super(ConfigurationItemView, self).get_context_data(**kwargs)
+        context = super(ConfigurationGroupView, self).get_context_data(**kwargs)
         config_pk = self.kwargs.get('pk')
         if config_pk:
             instance = get_object_or_404(QueryParameters, pk=config_pk)
