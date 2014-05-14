@@ -54,8 +54,8 @@ class ExportLDAP():
                      edges.append(e)
         #json = "{\\\"nodes\\\":" + str(nodes)+ ", \\\"links\\\":"+str(edges) + "}"
         json_object = {}
-        json['nodes'] = nodes;
-        json['links'] = links;
+        json_object['nodes'] = nodes;
+        json_object['links'] = links;
         j_out = json.dumps(json_object)
         #j_out = j_out + json.dumps(edges)
         print j_out        #self.edges(parameters,nodes,index)
