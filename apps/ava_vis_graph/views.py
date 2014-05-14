@@ -20,10 +20,10 @@ class ExportLDAP():
 
     def nodes(self, parameters):
         nodes = []
-        index = []
+        index = {}
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
         for user in ldap_users:
-            index.append(user.id)
+            index.append(user.id) = user
             groups = user.memberOf
             nodes.append(self.model_to_dict(user))
         print index
