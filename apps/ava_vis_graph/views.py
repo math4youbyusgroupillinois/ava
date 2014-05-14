@@ -34,7 +34,7 @@ class ExportLDAP():
     def edges(self, parameters):
         pass
 
-    def model_to_dict(instance, fields=None, exclude=None):
+    def model_to_dict(self,instance, fields=None, exclude=None):
         """
         Returns a dict containing the data in ``instance`` suitable for passing as
         a Form's ``initial`` keyword argument.
