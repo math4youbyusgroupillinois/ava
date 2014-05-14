@@ -1,14 +1,33 @@
 from django.shortcuts import render
+from django.views import generic
 from apps.ava_core_ldap.models import ActiveDirectoryUser, ActiveDirectoryGroup, QueryParameters
 
-class export_to_json():
+
+class LDAPGraphView(generic.ListView):
+    template_name = 'graph/ldap.html'
+    context_object_name = 'item_list'
+
+    def get_queryset(self):
+        qp = QueryParameters.objects.filter(pk=1)
+        nodes = ExportLDAP.nodes(qp)
+        return ActiveDirectoryUser.objects.filter(user=self.request.user)
+
+
+class ExportLDAP():
     nodes = []
     edges = []
 
     def nodes(self, parameters):
         ldap_users = ActiveDirectoryUser.objects.filter(queryparameters=parameters,user=self.request.user)
         for user in ldap_users:
-            nodes.add(self.model_to_dict(user))
+            nodes.append(self.model_to_dict(user))
+        print nodes
+        ldap_groups = ActiveDirectoryGroup.objects.filter(queryparameters=parameters,user=self.request.user)
+        for group in ldap_groups:
+            nodes.append(self.model_to_dict(group))
+        print nodes
+        return nodes
+
 
     def edges(self, parameters):
         pass
