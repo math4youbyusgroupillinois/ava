@@ -68,6 +68,6 @@ class ExportLDAP():
                         data[f.name] = [item.pk for item in qs]
                     else:
                         data[f.name] = list(qs.values_list('pk', flat=True))
-             else:
+            else:
                 data[f.name] = f.value_from_object(instance)
         return data
