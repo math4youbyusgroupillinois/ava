@@ -16,10 +16,10 @@ class LDAPGraphView(generic.ListView):
 
 
 class ExportLDAP():
-    nodes = []
     edges = []
 
     def nodes(self, parameters):
+        nodes = []
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
         for user in ldap_users:
             nodes.append(self.model_to_dict(user))
