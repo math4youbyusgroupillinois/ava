@@ -23,7 +23,7 @@ class ExportLDAP():
     def nodes(self, parameters):
         nodes = []
         index = {}
-        json = "{\\\"nodes\\\":"
+        json = "{\"nodes\":"
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
         for user in ldap_users:
             index[user.id] = user
@@ -52,7 +52,7 @@ class ExportLDAP():
                      e['source'] = user.id-1
                      e['target'] = key-1
                      edges.append(e)
-        json = json + str(nodes)+ ", \\\"links\\\":"+str(edges) + "}"
+        json = json + str(nodes)+ ", \"links\":"+str(edges) + "}"
         print json        #self.edges(parameters,nodes,index)
         return json
 
