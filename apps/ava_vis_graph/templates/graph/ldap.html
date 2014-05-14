@@ -37,7 +37,7 @@ var svg = d3.select(document.body).append("svg")
 alert(1);
 var test = JSON.parse(myGraph);
 alert(2);
-JSON.parse(myGraph, function(error, graph) {
+d3.json(test, function(error, graph) {
 force
 .nodes(graph.nodes)
 .links(graph.links)
