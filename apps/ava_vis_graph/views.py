@@ -46,8 +46,8 @@ class ExportLDAP():
                      #print user
                      e = {}
                      e['name'] = 'edge'+str(key)
-                     e['source'] = user.id
-                     e['target'] = key
+                     e['source'] = user.id-1
+                     e['target'] = key-1
                      edges.append(e)
         print edges
         #self.edges(parameters,nodes,index)
