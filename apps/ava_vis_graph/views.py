@@ -41,6 +41,7 @@ class ExportLDAP():
         for key,value in index.iteritems():
              if isinstance(value,ActiveDirectoryUser):
                  groups = value.memberOf
+                 print value
                  print groups.all()
                  for group in groups.all():
                      print group
