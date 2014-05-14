@@ -11,7 +11,7 @@ class LDAPGraphView(generic.ListView):
         results = QueryParameters.objects.filter(pk=1)
         exp = ExportLDAP()
         for qp in results :
-            nodes = exp.nodes(self,qp)
+            nodes = exp.nodes(qp)
         return ActiveDirectoryUser.objects.filter(user=self.request.user)
 
 
