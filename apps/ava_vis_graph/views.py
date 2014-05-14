@@ -48,7 +48,7 @@ class ExportLDAP():
                  for user in users:
                      #print user
                      e = {}
-                     e['value'] = 'edge'+str(user.id)+"_"+key
+                     e['value'] = 'edge'+str(user.id)+"_"+str(key)
                      e['source'] = user.id-1
                      e['target'] = key-1
                      edges.append(e)
