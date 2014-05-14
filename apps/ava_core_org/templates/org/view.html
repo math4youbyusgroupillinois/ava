@@ -20,6 +20,7 @@
                         <th># Users</th>
                         <th># Groups</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,7 @@
                         <td><a href="/ldap/{{ parameters.id }}/view/users/">{{ parameters.activedirectoryuser_set.count }}</a></td>
                         <td><a href="/ldap/{{ parameters.id }}/view/groups/">{{ parameters.activedirectorygroup_set.count }}</a></td>
                         <td><a href="/ldap/{{ parameters.id }}/getall/">[import]</a></td>
+                        <td><a href="/graph/ldap/{{ parameters.id }}/">[graph]</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
