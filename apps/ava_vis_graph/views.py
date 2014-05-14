@@ -3,8 +3,9 @@ from django.views import generic
 from apps.ava_core_ldap.models import ActiveDirectoryUser, ActiveDirectoryGroup, QueryParameters
 
 
-class LDAPGraphView(generic.DetailView):
+class LDAPGraphView(generic.DeleteView):
     template_name = 'graph/ldap.html'
+    model = QueryParameters
 
     def get_context_data(self, **kwargs):
         context = super(LDAPGraphView, self).get_context_data(**kwargs)
