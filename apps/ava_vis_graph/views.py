@@ -14,7 +14,7 @@ class LDAPGraphView(generic.DeleteView):
         if pk:
             parameters = get_object_or_404(QueryParameters, pk=pk)
             exp = ExportLDAP()
-            contex['json'] = exp.nodes(parameters)
+            context['json'] = exp.nodes(parameters)
         return context
 
 class ExportLDAP():
