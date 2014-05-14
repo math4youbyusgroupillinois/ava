@@ -41,6 +41,8 @@ force
 .links(graph.links)
 .start();
 
+alert(graph.nodes);
+
 var link = svg.selectAll(".link")
 .data(graph.links)
 .enter().append("line")
