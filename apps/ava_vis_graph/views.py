@@ -41,8 +41,9 @@ class ExportLDAP():
         for key,value in index.iteritems():
              if isinstance(value,ActiveDirectoryUser):
                  groups = value.memberOf
-                 print groups
+                 #print groups
                  for group in groups.all():
+                     print group
                      e = {}
                      e['name'] = 'edge'+str(key)
                      e['source'] = key
