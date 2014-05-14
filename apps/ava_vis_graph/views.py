@@ -27,7 +27,7 @@ class ExportLDAP():
             groups = user.memberOf
             nodes.append(self.model_to_dict(user))
         print index
-        print nodes
+        #print nodes
         ldap_groups = ActiveDirectoryGroup.objects.filter(queryParameters=parameters)
         for group in ldap_groups:
             nodes.append(self.model_to_dict(group))
