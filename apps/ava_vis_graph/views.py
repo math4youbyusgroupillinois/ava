@@ -31,7 +31,7 @@ class ExportLDAP():
         for group in ldap_groups:
             nodes.append(self.model_to_dict(group))
             index.append("GROUP::"+group.id)
-#print nodes
+        #print nodes
         self.edges(parameters,nodes,index)
         return nodes
 
@@ -39,7 +39,7 @@ class ExportLDAP():
     def edges(self, parameters,nodes,index):
         edges = []
         for i in index:
-            
+            pass    
 
     def model_to_dict(self,instance, fields=None, exclude=None):
         """
