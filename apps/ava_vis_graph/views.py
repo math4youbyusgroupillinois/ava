@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.views import generic
 from django.shortcuts import redirect, get_object_or_404
@@ -51,9 +52,11 @@ class ExportLDAP():
                      e['source'] = user.id-1
                      e['target'] = key-1
                      edges.append(e)
-        json = "{\\\"nodes\\\":" + str(nodes)+ ", \\\"links\\\":"+str(edges) + "}"
-        print json        #self.edges(parameters,nodes,index)
-        return json
+        #json = "{\\\"nodes\\\":" + str(nodes)+ ", \\\"links\\\":"+str(edges) + "}"
+        j_out = json.dumps(nodes)
+        j_out = j_out + json.dumps(edges)
+        print j_out        #self.edges(parameters,nodes,index)
+        return j_out
 
 
     def edges(self, parameters,nodes,index):
