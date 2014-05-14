@@ -33,17 +33,17 @@ class ExportLDAP():
         pass
 
     def model_to_dict(instance, fields=None, exclude=None):
-    """
-    Returns a dict containing the data in ``instance`` suitable for passing as
-    a Form's ``initial`` keyword argument.
+        """
+        Returns a dict containing the data in ``instance`` suitable for passing as
+        a Form's ``initial`` keyword argument.
     
-    ``fields`` is an optional list of field names. If provided, only the named
-    fields will be included in the returned dict.
+        ``fields`` is an optional list of field names. If provided, only the named
+        fields will be included in the returned dict.
     
-    ``exclude`` is an optional list of field names. If provided, the named
-    fields will be excluded from the returned dict, even if they are listed in
-    the ``fields`` argument.
-    """
+        ``exclude`` is an optional list of field names. If provided, the named
+        fields will be excluded from the returned dict, even if they are listed in
+        the ``fields`` argument.
+        """
         # avoid a circular import
         from django.db.models.fields.related import ManyToManyField
         opts = instance._meta
