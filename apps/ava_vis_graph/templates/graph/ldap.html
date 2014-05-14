@@ -37,21 +37,21 @@ var svg = d3.select(document.body).append("svg")
 alert(1);
 var test = JSON.parse(myGraph);
 alert(2);
-d3.json(test, function(error, graph) {
+//d3.json(test, function(error, graph) {
 force
-.nodes(graph.nodes)
-.links(graph.links)
+.nodes(test.nodes)
+.links(test.links)
 .start();
 
 alert(3);
 var link = svg.selectAll(".link")
-.data(graph.links)
+.data(test.links)
 .enter().append("line")
 .attr("class", "link")
 .style("stroke-width", function(d) { return Math.sqrt(d.value); });
 
 var node = svg.selectAll(".node")
-.data(graph.nodes)
+.data(test.nodes)
 .enter().append("circle")
 .attr("class", "node")
 .attr("r", 5)
