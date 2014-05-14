@@ -43,13 +43,13 @@ class ExportLDAP():
                  users = value.member.all()
                  #print groups
                  for user in users:
-                     print user
+                     #print user
                      e = {}
                      e['name'] = 'edge'+str(key)
                      e['source'] = user.id
                      e['target'] = key
                      edges.append(e)
-        #print edges
+        print edges
         #self.edges(parameters,nodes,index)
         return nodes
 
