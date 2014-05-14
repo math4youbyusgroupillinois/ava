@@ -9,9 +9,11 @@ class LDAPGraphView(generic.DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(LDAPGraphView, self).get_context_data(**kwargs)
-        exp = ExportLDAP()
-        for qp in results :
-            contex['json'] = exp.nodes(qp)
+        pk = self.kwargs.get('pk')
+        if pk:
+            parameters = get_object_or_404(QueryParamters, pk=pk)
+            exp = ExportLDAP()
+            contex['json'] = exp.nodes(parameters)
         return context
 
 class ExportLDAP():
