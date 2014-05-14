@@ -38,7 +38,7 @@ class ExportLDAP():
         #print index
         edges = []
         
-        for key,value in index:
+        for key,value in index.iteritems():
              if isinstance(value,ActiveDirectoryUser):
                  groups = value.memberOf
                  for group in groups:
