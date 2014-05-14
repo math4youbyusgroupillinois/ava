@@ -24,7 +24,7 @@ class ExportLDAP():
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
         for user in ldap_users:
             index[user.id] = user
-            print user.memberOf.all()
+            #print user.memberOf.all()
             nodes.append(self.model_to_dict(user))
         #print index
         user_count = len(index)
@@ -39,15 +39,15 @@ class ExportLDAP():
         edges = []
         
         for key,value in index.iteritems():
-             if isinstance(value,ActiveDirectoryUser):
-                 groups = value.memberOf.all()
+             if isinstance(value,ActiveDirectoryGroup):
+                 users = value.member.all()
                  #print groups
-                 for group in groups:
-                     print group
+                 for user in users:
+                     print user
                      e = {}
                      e['name'] = 'edge'+str(key)
-                     e['source'] = key
-                     e['target'] = group+user_count
+                     e['source'] = user.id
+                     e['target'] = key
                      edges.append(e)
         #print edges
         #self.edges(parameters,nodes,index)
