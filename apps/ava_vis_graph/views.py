@@ -3,17 +3,15 @@ from django.views import generic
 from apps.ava_core_ldap.models import ActiveDirectoryUser, ActiveDirectoryGroup, QueryParameters
 
 
-class LDAPGraphView(generic.ListView):
+class LDAPGraphView(generic.DetailView):
     template_name = 'graph/ldap.html'
-    context_object_name = 'item_list'
 
-    def get_queryset(self):
-        results = QueryParameters.objects.filter(pk=1)
+    def get_context_data(self, **kwargs):
+        context = super(LDAPGraphView, self).get_context_data(**kwargs)
         exp = ExportLDAP()
         for qp in results :
-            nodes = exp.nodes(qp)
-        return ActiveDirectoryUser.objects.filter(user=self.request.user)
-
+            contex['json'] = exp.nodes(qp)
+        return context
 
 class ExportLDAP():
     edges = []
@@ -46,7 +44,7 @@ class ExportLDAP():
                  for user in users:
                      #print user
                      e = {}
-                     e['name'] = 'edge'+str(key)
+                     e['value'] = 'edge'+str(user.id)+"_"+key
                      e['source'] = user.id-1
                      e['target'] = key-1
                      edges.append(e)
