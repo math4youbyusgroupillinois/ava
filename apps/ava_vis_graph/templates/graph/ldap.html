@@ -33,17 +33,14 @@ var force = d3.layout.force()
 .linkDistance(30)
 .size([width, height]);
 
-var svg = d3.select('div.graph').append("svg")
+var svg = d3.select("#graph").append("svg")
 .attr("width", width)
 .attr("height", height);
 
-alert(1);
 var test = JSON.parse(myGraph);
-alert(2);
 //d3.json(test, function(error, graph) {
 force.nodes(test.nodes).links(test.links).start();
 
-alert(3);
 var link = svg.selectAll(".link")
 .data(test.links)
 .enter().append("line")
