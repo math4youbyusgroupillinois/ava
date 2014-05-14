@@ -38,10 +38,7 @@ alert(1);
 var test = JSON.parse(myGraph);
 alert(2);
 //d3.json(test, function(error, graph) {
-force
-.nodes(test.nodes)
-.links(test.links)
-.start();
+force.nodes(test.nodes).links(test.links).start();
 
 alert(3);
 var link = svg.selectAll(".link")
