@@ -72,10 +72,10 @@ class ExportLDAP():
                  users = value.member.all()
                  for user in users:
                      e = {}
-                     e['value'] = 'edge'+str(user.id)+"_"+str(key)
-                     e['source'] = elements.index(user)
+                     user_index = elements.index(user)
+                     e['value'] = 'edge'+str(user_index)+"_"+str(index)
+                     e['source'] = ser_index
                      e['target'] = index
-                     print e
                      edges.append(e)
         #json = "{\\\"nodes\\\":" + str(nodes)+ ", \\\"links\\\":"+str(edges) + "}"
         json_object = {}
