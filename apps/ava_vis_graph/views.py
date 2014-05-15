@@ -54,6 +54,8 @@ class ExportLDAP():
         ldap_groups = ActiveDirectoryGroup.objects.filter(queryParameters=parameters)
         g = ['cn','member']
         for group in ldap_groups:
+                print group.member.count()
+                print hide
                 if(group.member.count() > 0 and hide):
                     current = self.model_to_dict(group,g)
                     current['node_type'] = 'group'
