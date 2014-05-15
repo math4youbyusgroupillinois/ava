@@ -28,15 +28,18 @@ class ExportLDAP():
         fields=['displayName']
         for user in ldap_users:
             index[user.id] = user
-            #print user.memberOf.all()
-            nodes.append(self.model_to_dict(user,fields))
+            current = self.model_to_dict(user,fields)
+            current['node_type'] = 'user'
+            nodes.append(current)
         #print index
         user_count = len(index)
         #print nodes
         ldap_groups = ActiveDirectoryGroup.objects.filter(queryParameters=parameters)
         g = ['cn','member']
-        for group in ldap_groups:
-            nodes.append(self.model_to_dict(group,g))
+        for group in ldap_groups
+            current = self.model_to_dict(group,g)
+            current['node_type'] = 'group'
+            nodes.append(current)
             pointer = group.id+user_count
             index[pointer] = group
             #index.append("GROUP::"+group.id)
