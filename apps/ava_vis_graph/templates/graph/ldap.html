@@ -66,14 +66,14 @@ node.append("circle")
 node.append("text")
 .attr("dx", 12)
 .attr("dy", ".35em")
-.attr("fill", "black")
 .text(function(d) { 
         if(d.node_type == 'group'){
             return d.cn
         } else {
             return d.displayName
         }
-});
+})
+.attr("fill", "black");
 
 //node.append("title")
 //.text(function(d) {
