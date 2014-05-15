@@ -25,7 +25,7 @@ class LDAPGraphHideView(generic.DeleteView):
     model = QueryParameters
 
     def get_context_data(self, **kwargs):
-        context = super(LDAPGraphView, self).get_context_data(**kwargs)
+        context = super(LDAPGraphHideView, self).get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
         if pk:
             parameters = get_object_or_404(QueryParameters, pk=pk)
