@@ -40,11 +40,11 @@ class ExportLDAP():
 
     def nodes(self, parameters,hide):
         nodes = []
-        index = {}
+        elements = []
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
         fields=['displayName']
         for user in ldap_users:
-            index[user.id] = user
+            elements.append(user)
             current = self.model_to_dict(user,fields)
             current['node_type'] = 'user'
             nodes.append(current)
@@ -61,19 +61,20 @@ class ExportLDAP():
                     current['node_type'] = 'group'
                     nodes.append(current)
                     pointer = group.id+user_count
-                    index[pointer] = group
+                    elements.append(group)
         edges = []
         
-        for key,value in index.iteritems():
-             if isinstance(value,ActiveDirectoryGroup):
+        #for key,value in index.iteritems():
+         for index, value in enumerate(nodes):
+            if isinstance(value,ActiveDirectoryGroup):
                  users = value.member.all()
                  #print groups
                  for user in users:
                      #print user
                      e = {}
                      e['value'] = 'edge'+str(user.id)+"_"+str(key)
-                     e['source'] = user.id-1
-                     e['target'] = key-1
+                     e['source'] = elements.index(user)
+                     e['target'] = index
                      edges.append(e)
         #json = "{\\\"nodes\\\":" + str(nodes)+ ", \\\"links\\\":"+str(edges) + "}"
         json_object = {}
