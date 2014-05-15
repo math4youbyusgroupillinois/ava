@@ -68,13 +68,19 @@ node.append("text")
         if(d.node_type == 'group'){
             return d.cn
         } else {
-            alert(d.displayName)
             return d.displayName
         }
 });
 
 node.append("title")
-.text(function(d) { return d.name; });
+.text(function(d) {
+        if(d.node_type == 'group'){
+            return d.cn
+        } else {
+            return d.displayName
+        }
+});
+
 
 force.on("tick", function() {
 link.attr("x1", function(d) { return d.source.x; })
