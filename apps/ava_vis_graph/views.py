@@ -72,7 +72,7 @@ class ExportLDAP():
                  users = value.member.all()
                  #print groups
                  for user in users:
-                     #print user
+                     print user
                      e = {}
                      e['value'] = 'edge'+str(user.id)+"_"+str(key)
                      e['source'] = elements.index(user)
@@ -85,7 +85,7 @@ class ExportLDAP():
         json_object['links'] = edges;
         j_out = json.dumps(json_object)
         #j_out = j_out + json.dumps(edges)
-        print j_out        #self.edges(parameters,nodes,index)
+        #print j_out        #self.edges(parameters,nodes,index)
         return j_out
 
 
