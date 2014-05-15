@@ -49,7 +49,7 @@ class ExportLDAP():
             current['node_type'] = 'user'
             nodes.append(current)
         #print index
-        user_count = len(index)
+        user_count = len(elements)
         #print nodes
         ldap_groups = ActiveDirectoryGroup.objects.filter(queryParameters=parameters)
         g = ['cn','member']
