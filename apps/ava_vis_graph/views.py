@@ -70,7 +70,7 @@ class ExportLDAP():
         for index, value in enumerate(nodes):
             if isinstance(value,ActiveDirectoryGroup):
                  users = value.member.all()
-                 #print groups
+                 print users
                  for user in users:
                      print user
                      e = {}
