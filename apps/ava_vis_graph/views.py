@@ -15,13 +15,30 @@ class LDAPGraphView(generic.DeleteView):
         if pk:
             parameters = get_object_or_404(QueryParameters, pk=pk)
             exp = ExportLDAP()
-            context['json'] = exp.nodes(parameters)
+            context['json'] = exp.nodes(parameters,False)
+            context['link'] = "/graph/ldap/"+pk+"/hide/"
+            context['link_message'] = "Hide Empty Groups"
+        return context
+
+class LDAPGraphHideView(generic.DeleteView):
+    template_name = 'graph/ldap.html'
+    model = QueryParameters
+
+    def get_context_data(self, **kwargs):
+        context = super(LDAPGraphView, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk')
+        if pk:
+            parameters = get_object_or_404(QueryParameters, pk=pk)
+            exp = ExportLDAP()
+            context['json'] = exp.nodes(parameters,True)
+            context['link'] = "/graph/ldap/"+pk+"/"
+            context['link_message'] = "Show Empty Groups"
         return context
 
 class ExportLDAP():
     edges = []
 
-    def nodes(self, parameters):
+    def nodes(self, parameters,hide):
         nodes = []
         index = {}
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
@@ -37,13 +54,13 @@ class ExportLDAP():
         ldap_groups = ActiveDirectoryGroup.objects.filter(queryParameters=parameters)
         g = ['cn','member']
         for group in ldap_groups:
-            current = self.model_to_dict(group,g)
-            current['node_type'] = 'group'
-            nodes.append(current)
-            pointer = group.id+user_count
-            index[pointer] = group
-            #index.append("GROUP::"+group.id)
-        #print index
+            if (hide):
+                if(group.member.count() > 0)
+                    current = self.model_to_dict(group,g)
+                    current['node_type'] = 'group'
+                    nodes.append(current)
+                    pointer = group.id+user_count
+                    index[pointer] = group
         edges = []
         
         for key,value in index.iteritems():
