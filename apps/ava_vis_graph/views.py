@@ -67,13 +67,10 @@ class ExportLDAP():
         edges = []
         
         #for key,value in index.iteritems():
-        for index, value in enumerate(nodes):
-            print value
+        for index, value in enumerate(elements):
             if isinstance(value,ActiveDirectoryGroup):
                  users = value.member.all()
-                 print users
                  for user in users:
-                     print user
                      e = {}
                      e['value'] = 'edge'+str(user.id)+"_"+str(key)
                      e['source'] = elements.index(user)
