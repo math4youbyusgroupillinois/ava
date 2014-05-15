@@ -16,7 +16,7 @@ stroke-width: 1.5px;
 .node text {
 pointer-events: none;
 font: 10px sans-serif;
-color:#fff
+color:#000;
 }
 
 .link {
@@ -53,14 +53,6 @@ var link = svg.selectAll(".link")
 .attr("class", "link")
 .style("stroke-width", function(d) { return Math.sqrt(d.value); });
 
-//var node = svg.selectAll(".node")
-//.data(test.nodes)
-//.enter().append("circle")
-//.attr("class", "node")
-//.attr("r", 10)
-//.style("fill", function(d) { return color(d.node_type); })
-//.call(force.drag);
-
 var node = svg.selectAll(".node")
 .data(test.nodes)
 .enter().append("g")
@@ -74,6 +66,7 @@ node.append("circle")
 node.append("text")
 .attr("dx", 12)
 .attr("dy", ".35em")
+//.style("color", "#000");
 .text(function(d) { 
         if(d.node_type == 'group'){
             return d.cn
