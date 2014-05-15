@@ -56,7 +56,7 @@ class ExportLDAP():
         for group in ldap_groups:
                 print group.member.count()
                 print hide
-                if(group.member.count() > 0 and hide):
+                if((hide == True and group.member.count() > 0) or hide == False):
                     current = self.model_to_dict(group,g)
                     current['node_type'] = 'group'
                     nodes.append(current)
