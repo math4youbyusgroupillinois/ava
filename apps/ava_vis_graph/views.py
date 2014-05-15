@@ -54,8 +54,6 @@ class ExportLDAP():
         ldap_groups = ActiveDirectoryGroup.objects.filter(queryParameters=parameters)
         g = ['cn','member']
         for group in ldap_groups:
-                print group.member.count()
-                print hide
                 current = self.model_to_dict(group,g)
                 current['node_type'] = 'group'
                 if(hide == True and group.member.count() > 0):
@@ -79,6 +77,7 @@ class ExportLDAP():
                      e['value'] = 'edge'+str(user.id)+"_"+str(key)
                      e['source'] = elements.index(user)
                      e['target'] = index
+                     print e
                      edges.append(e)
         #json = "{\\\"nodes\\\":" + str(nodes)+ ", \\\"links\\\":"+str(edges) + "}"
         json_object = {}
