@@ -102,7 +102,9 @@ function showMostLoggedOn(){
         //        }
         //})
         //.data(test.nodes)
-        .attr("r", function(d) {
+        .attr("r", function(d,i,this) {
+              alert(d)
+              
               if (d.node_type == 'user') {
                     alert(d.logonCount); 
                     //return 10 + parseInt(d.logonCount);
