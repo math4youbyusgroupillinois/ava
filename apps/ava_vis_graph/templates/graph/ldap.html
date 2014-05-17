@@ -60,7 +60,7 @@ var node = svg.selectAll(".node")
 .data(test.nodes)
 .enter().append("g")
 .attr("class", "node")
-.attr("id","N"+parseInt(d.id))
+.attr("id",function(d) { return "N"+parseInt(d.id)); })
 .call(force.drag);
 
 node.append("circle")
