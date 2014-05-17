@@ -94,9 +94,10 @@ function showMostLoggedOn(){
             d3.select(this)
                 .data(test.nodes)
                 .attr("r", function(d) {
-                alert(d.displayName)
-                return 10 + parseInt(d.logonCount);
-            })
+                    alert(d.displayName);
+                    return 10 + parseInt(d.logonCount);
+                });
+    });
 }
 
 function showNeverLoggedOn(){
