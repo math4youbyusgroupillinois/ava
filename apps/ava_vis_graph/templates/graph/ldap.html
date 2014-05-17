@@ -90,7 +90,7 @@ function hideEmptyGroups(){
 }
 
 function showNeverLoggedOn(){
-    var svg = d3.select("#graph").
+    var svg = d3.select("#graph")
 
     var node = svg.selectAll(".node").selectAll("circle")
     .attr("r", function(d) {
@@ -100,7 +100,7 @@ function showNeverLoggedOn(){
         } else {
             return 10
         }
-    .attr("class", "neverloggedin")
+    .attr("class", "neverloggedin");
 }
 
 function showAccountExpiry(){
