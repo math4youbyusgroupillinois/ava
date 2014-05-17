@@ -89,7 +89,7 @@ function showNeverLoggedOn(){
     var svg = d3.select("#graph");
     alert(svg);
     var node = svg.selectAll(".node");
-    var circle = svg.selectAll(".circle");
+    var circle = svg.selectAll(".circle")
     .attr("r", function(d) {
         //alert(d);
         if(d.LastLogon == 'Never'){
