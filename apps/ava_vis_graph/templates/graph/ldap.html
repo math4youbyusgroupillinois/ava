@@ -87,10 +87,10 @@ node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"
                                           });
 function showNeverLoggedOn(){
     var svg = d3.select("#graph");
-    alert(svg);
+    alert(svg.innerHTML);
     var node = svg.selectAll(".node")
     .attr("r", function(d) {
-        alert(d);
+        //alert(d);
         if(d.LastLogon == 'Never'){
             return 30;
         } else {
