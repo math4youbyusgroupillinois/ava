@@ -88,7 +88,7 @@ node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"
 function showNeverLoggedOn(){
     var svg = d3.select("#graph")
 
-    var node = svg.selectAll(".node").selectAll("circle")
+    var node = svg.selectAll(".node")
     .attr("r", function(d) {
         alert(d.LastLogon)
         if(d.LastLogon == 'Never'){
