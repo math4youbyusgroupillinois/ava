@@ -90,6 +90,7 @@ function showNeverLoggedOn(){
     alert(svg);
     var node = svg.selectAll(".node");
     var circle = node.selectAll("circle")
+    .data(test.nodes)
     .attr("r", function(d) {
         //alert(d);
         if(d.LastLogon == 'Never'){
