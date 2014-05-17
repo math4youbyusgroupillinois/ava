@@ -90,17 +90,10 @@ node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"
 function showMostLoggedOn(){
     var test = JSON.parse(myGraph);
     var svg = d3.select("#graph");
-    //var node = svg.selectAll(".node").selectAll("circle")
+    var node = svg.selectAll(".node").selectAll("circle")
     var node = svg.selectAll(".node")
         .data(function(d) { return d; })
-        .enter.select("circle")
-
-        //.data(function(d) { 
-        //        if (d.node_type == 'user') {
-                    //alert(d.logonCount); 
-        //            return d;   
-        //        }
-        //})
+        .enter.append("circle")
         .attr("r", function(d,i) {
               alert(d);
               
