@@ -2,7 +2,7 @@
 {% block mainpage %}
    <h1 class="page-header">Active Directory Graph</h1>
    <a href="{{ link }}">{{ link_message }}</a>
-   <a href="javascript:showMostLoggedOn();">Show Most Logged In</a>
+   <a href="javascript:showMostLoggedOn(myGraph);">Show Most Logged In</a>
    <a href="javascript:showNeverLoggedOn();">Show Never Logged In</a>
        <div class="table-responsive">  
 
@@ -87,12 +87,11 @@ link.attr("x1", function(d) { return d.source.x; })
 
 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
                                           });
-function showMostLoggedOn(){
+function showMostLoggedOn(myGraph){
     var test = JSON.parse(myGraph);
     var svg = d3.select("#graph");
     var node = svg.selectAll(".node").selectAll("circle")
-    //var node = svg.selectAll(".node")
-        .data(function(d) { return d; })
+        .data(myGraph.nodes)
         .enter.append("circle")
         .attr("r", function(d,i) {
               alert(d);
