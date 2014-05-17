@@ -276,8 +276,7 @@ class LDAPSearchResult:
         return out.getvalue()
 
 
-class ExportLDAP()
-:
+class ExportLDAP():
     def generateGraph(self,parameters)
         node_results = self.nodes(parameters)
         return self.edges(node_results)
