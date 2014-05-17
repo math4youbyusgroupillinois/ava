@@ -85,10 +85,6 @@ link.attr("x1", function(d) { return d.source.x; })
 
 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
                                           });
-
-function hideEmptyGroups(){
-}
-
 function showNeverLoggedOn(){
     var svg = d3.select("#graph")
 
@@ -100,11 +96,10 @@ function showNeverLoggedOn(){
         } else {
             return 10
         }
+    })
     .attr("class", "neverloggedin");
 }
 
-function showAccountExpiry(){
-}
 
 </script>
 </div>
