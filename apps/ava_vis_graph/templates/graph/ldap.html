@@ -99,7 +99,7 @@ function showMostLoggedOn(){
         })
         //.data(test.nodes)
         .attr("r", function(d) {
-              alert(d.logonCount); 
+              alert(d.data().logonCount); 
               if (d.node_type == 'user') {
                     //alert(d.logonCount); 
                     return 10 + parseInt(d.logonCount);
