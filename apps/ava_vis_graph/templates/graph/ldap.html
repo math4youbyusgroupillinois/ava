@@ -93,7 +93,7 @@ function showMostLoggedOn(){
     //var node = svg.selectAll(".node").selectAll("circle")
     var node = svg.selectAll(".node")
         .data()
-        .enter.select("circle")
+        .enter.append("circle")
 
         //.data(function(d) { 
         //        if (d.node_type == 'user') {
