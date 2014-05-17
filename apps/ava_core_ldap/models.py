@@ -287,7 +287,7 @@ class ExportLDAP():
         nodes = []
         elements = []
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
-        fields = ['objectGUID','accountExpire','adminCount','displayName','isCriticalSystemObject','lastLogon','logonCount','pwdLastSet']
+        fields = ['id','accountExpire','adminCount','displayName','isCriticalSystemObject','lastLogon','logonCount','pwdLastSet']
         for user in ldap_users:
             elements.append(user)
             current = self.model_to_dict(user,fields)
