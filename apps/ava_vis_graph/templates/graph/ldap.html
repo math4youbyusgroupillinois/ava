@@ -86,15 +86,15 @@ link.attr("x1", function(d) { return d.source.x; })
 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
                                           });
 function showNeverLoggedOn(){
-    var svg = d3.select("#graph")
-
+    var svg = d3.select("#graph");
+    alert(svg);
     var node = svg.selectAll(".node")
     .attr("r", function(d) {
-        alert(d.LastLogon)
+        alert(d);
         if(d.LastLogon == 'Never'){
-            return 30
+            return 30;
         } else {
-            return 10
+            return 10;
         }
     })
     .attr("class", "neverloggedin");
