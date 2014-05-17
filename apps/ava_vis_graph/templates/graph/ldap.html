@@ -90,8 +90,8 @@ node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"
 function showMostLoggedOn(){
     var test = JSON.parse(myGraph);
     var svg = d3.select("#graph");
-    var node = svg.selectAll(".node").selectAll("circle")
-    //var node = svg.selectAll(".node")
+    //var node = svg.selectAll(".node").selectAll("circle")
+    var node = svg.selectAll(".node")
         .data()
         .enter.select("circle")
 
