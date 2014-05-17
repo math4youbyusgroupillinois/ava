@@ -5,9 +5,11 @@ from apps.ava_core_org.models import Organisation
 
 from django.contrib.auth.models import User
 from ldap import *
-import ldif, sys
+import ldif, sys, json
 from StringIO import StringIO
 from ldap.cidict import cidict
+
+
 #from django.core.exceptions import DoesNotExist
 
 class ActiveDirectoryUser(TimeStampedModel):
