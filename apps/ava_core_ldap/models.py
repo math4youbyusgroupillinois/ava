@@ -127,7 +127,6 @@ class ActiveDirectoryHelper():
         ret_res = []
         for record in res:
             ret_res.append(record.to_ldif())
-            #print "Test::"+record.to_ldif()
 
         connection.unbind()
         return res
@@ -161,15 +160,10 @@ class ActiveDirectoryHelper():
                         new_attrs[key] = value
                         if key == 'member':
                             user_cn = value.split(' CN=')
-                            #print  value
-                            #print  user_cn
-                            #print  "************************"
                             for cn in user_cn:
                                 if not cn.startswith('CN='):
                                     cn = "CN="+cn
-                                #print cn
                                 qs=ActiveDirectoryUser.objects.filter(user=user,queryParameters=parameters,distinguishedName=cn).first()
-                                #print qs
                                 if qs:
                                     users.append(qs)
                     else:
@@ -207,16 +201,11 @@ class ActiveDirectoryHelper():
                         new_attrs[key] = value
                         if key == 'memberOf':
                             group_cn = value.split(' CN=')
-                            #print  value
-                            #print  "************************"
                             for cn in group_cn:
                                 if not value.startswith('CN='):
                                     cn = "CN="+cn
-                                #print cn
                                 qs = ActiveDirectoryGroup.objects.filter(user=user,queryParameters=parameters,cn=cn).first()
-                                #print qs
                                 if qs:
-                                    #print "goldfish"
                                     groups.append(qs)
                     else:
                         new_attrs[key] = self.cleanhex(value)
@@ -228,21 +217,12 @@ class ActiveDirectoryHelper():
                 ad_user.memberOf.add(*groups)
                 ad_user.save()
     
-    #def getFiltered(self,filter):
-    #    filter = '(objectclass=group)'
-    #    attrs = ['*']
-    #    results = self.search(parameters,filter,attr)
-
-
-
 
 class LDAPSearchResult:
-    #A class to model LDAP results.
     dn = ''
     attrs = {}
 
     def __init__(self, entry_tuple):
-        #Create a new LDAPSearchResult object.
         (dn, attrs) = entry_tuple
         if dn:
             self.dn = dn
@@ -253,47 +233,30 @@ class LDAPSearchResult:
 
 
     def get_attributes(self):
-        #Get a dictionary of all attributes.
-        #get_attributes()-> {'name1': ['value1', 'value2', ...], 'name2': [value1...]}
         return self.attrs
 
 
     def set_attributes(self, attr_dict):
-        #Set the list of attributes for this record.
-        #The format of the dictionary should be string key, list of
-        #string alues. e.g. {'cn': ['M Butcher','Matt Butcher']}
-        #set_attributes(attr_dictionary)
         self.attrs = cidict(attr_dict)
 
 
     def has_attribute(self, attr_name):
-        #Returns true if there is an attribute by this name in the
-        #record.
-        #has_attribute(attr_name)-> boolean
         return self.attrs.has_key(attr_name)
 
 
     def get_attr_values(self, key):
-        #Get a list of attribute values.
-        #get_attr_values(key)-> ['value1', 'value2']
         return self.attrs[key]
 
 
     def get_attr_names(self):
-        #Get a list of attribute names.
-        #get_attr_names()-> ['name1', 'name2', ...]
         return self.attrs.keys()
 
 
     def get_dn(self):
-        #Get the DN string for the record.
-        #get_dn()-> string dn
         return self.dn
 
 
     def pretty_print(self):
-        #Create a nice string representation of this object.
-        #pretty_print()-> string
         str = "DN: " + self.dn + "\n"
         for a, v_list in self.attrs.iteritems():
             str = str + "Name: " + a + "\n"
@@ -304,21 +267,107 @@ class LDAPSearchResult:
 
 
     def to_ldif(self):
-        #Get an LDIF representation of this record.
-        #to_ldif()-> string
         out = StringIO()
         ldif_out = ldif.LDIFWriter(out)
-
-        # what's all this then?  the unparse method will currently only accept
-        # a list or a dict, not a class derived from them.  self.data is a
-        # cidict, so unparse barfs on it.  I've filed a bug against python-ldap,
-        # but in the meantime, we have to convert to a plain old dict for printing
         newdata = {}
         if hasattr(self, 'attrs'):
             newdata.update(self.attrs)
-
-
         ldif_out.unparse(self.dn, newdata)
         return out.getvalue()
 
 
+class ExportLDAP()
+:
+    def generateGraph(self,parameters)
+        node_results = self.nodes(parameters)
+        return self.edges(node_results)
+    
+    def nodes(self, parameters):
+        nodes = []
+        elements = []
+        ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
+        fields = ['accountExpire','adminCount','displayName','isCriticalSystemObject','lastLogon','logonCount','pwdLastSet']
+        for user in ldap_users:
+            elements.append(user)
+            current = self.model_to_dict(user,fields)
+            current['node_type'] = 'user'
+            nodes.append(current)
+        
+        ldap_groups = ActiveDirectoryGroup.objects.filter(queryParameters=parameters)
+        g = ['cn','member']
+        for group in ldap_groups:
+                current = self.model_to_dict(group,g)
+                current['node_type'] = 'group'
+                #if(hide == True and group.member.count() > 0):
+                nodes.append(current)
+                elements.append(group)
+                #else:
+                #    if(hide == False):
+                #        nodes.append(current)
+                #        elements.append(group)
+        
+        results['elements'] = elements
+        results['nodes'] = nodes
+        return results        
+        
+    def edges(self,results):
+        elements = results['elements']
+        nodes = results['nodes']
+        
+        edges = []
+        for index, value in enumerate(elements):
+            if isinstance(value,ActiveDirectoryGroup):
+                users = value.member.all()
+                for user in users:
+                    current_edge = {}
+                    user_index = elements.index(user)
+                    current_edge['value'] = 'edge'+str(user_index)+"_"+str(index)
+                    current_edge['source'] = user_index
+                    current_edge['target'] = index
+                    edges.append(current_edge)
+            
+        json_object = {}
+        json_object['nodes'] = nodes;
+        json_object['links'] = edges;
+        j_out = json.dumps(json_object)
+        return j_out
+
+    def model_to_dict(self,instance, fields=None, exclude=None):
+        """
+        Returns a dict containing the data in ``instance`` suitable for passing as
+        a Form's ``initial`` keyword argument.
+    
+        ``fields`` is an optional list of field names. If provided, only the named
+        fields will be included in the returned dict.
+    
+        ``exclude`` is an optional list of field names. If provided, the named
+        fields will be excluded from the returned dict, even if they are listed in
+        the ``fields`` argument.
+        """
+        # avoid a circular import
+        from django.db.models.fields.related import ManyToManyField
+        opts = instance._meta
+        data = {}
+        for f in opts.concrete_fields + opts.virtual_fields + opts.many_to_many:
+            if not getattr(f, 'editable', False):
+                continue
+            if fields and f.name not in fields:
+                continue
+            if exclude and f.name in exclude:
+                continue
+            if isinstance(f, ManyToManyField):
+                # If the object doesn't have a primary key yet, just use an empty
+                # list for its m2m fields. Calling f.value_from_object will raise
+                # an exception.
+                if instance.pk is None:
+                    data[f.name] = []
+                else:
+                    # MultipleChoiceWidget needs a list of pks, not object instances.
+                    qs = f.value_from_object(instance)
+                    if qs._result_cache is not None:
+                        data[f.name] = [item.pk for item in qs]
+                    else:
+                        data[f.name] = list(qs.values_list('pk', flat=True))
+            else:
+                data[f.name] = f.value_from_object(instance)
+        return data

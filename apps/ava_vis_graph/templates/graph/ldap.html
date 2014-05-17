@@ -5,7 +5,8 @@
        <div class="table-responsive">  
 
            <div id=graph></div>    
-<meta charset="utf-8">
+           <a href="javascript:showNeverLoggedOn();">
+           <meta charset="utf-8">
 <style>
 
 .node {
@@ -76,15 +77,6 @@ node.append("text")
 })
 .attr("fill", "black");
 
-//node.append("title")
-//.text(function(d) {
-//        if(d.node_type == 'group'){
- //           return d.cn
-//        } else {
-//            return d.displayName
-//        }
-//});
-
 force.on("tick", function() {
 link.attr("x1", function(d) { return d.source.x; })
 .attr("y1", function(d) { return d.source.y; })
@@ -93,6 +85,26 @@ link.attr("x1", function(d) { return d.source.x; })
 
 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
                                           });
+
+function hideEmptyGroups(){
+}
+
+function showNeverLoggedOn(){
+    var svg = d3.select("#graph").
+
+    var node = svg.selectAll(".node").selectAll("circle")
+    .attr("r", function(d) {
+        alert(d.LastLogon)
+        if(d.LastLogon == 'Never'){
+            return 30
+        } else {
+            return 10
+        }
+    .attr("class", "neverloggedin")
+}
+
+function showAccountExpiry(){
+}
 
 </script>
 </div>
