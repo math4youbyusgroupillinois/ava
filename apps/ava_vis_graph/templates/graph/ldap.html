@@ -93,13 +93,14 @@ function showMostLoggedOn(){
     var node = svg.selectAll(".node").selectAll("circle")
         .data(function(d) { 
                 if (d.node_type == 'user') {
-                    alert(d.logonCount); 
+                    //alert(d.logonCount); 
                     return d;   
                 }
         })
         //.data(test.nodes)
         .attr("r", function(d) {
               if (d.node_type == 'user') {
+                    alert(d.logonCount); 
                     return 10 + parseInt(d.logonCount);
               }
          });
