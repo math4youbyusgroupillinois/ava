@@ -91,19 +91,20 @@ function showMostLoggedOn(){
     var test = JSON.parse(myGraph);
     var svg = d3.select("#graph");
     var node = svg.selectAll(".node").selectAll("circle")
-        .data(function(d) { 
-                if (d.node_type == 'user') {
+        //.data(function(d) { 
+        //        if (d.node_type == 'user') {
                     //alert(d.logonCount); 
-                    return d;   
-                }
-        })
+        //            return d;   
+        //        }
+        //})
         //.data(test.nodes)
         .attr("r", function(d) {
               alert(this.data()); 
-              if (d.node_type == 'user') {
+              //if (d.node_type == 'user') {
                     //alert(d.logonCount); 
-                    return 10 + parseInt(d.logonCount);
-              }
+                    //return 10 + parseInt(d.logonCount);
+                    return 10;
+             // }
          });
     
 }
