@@ -60,7 +60,7 @@ var node = svg.selectAll(".node")
 .data(test.nodes)
 .enter().append("g")
 .attr("class", "node")
-.attr("id", d.objectGUID)
+.attr("id","N"+d.objectGUID)
 .call(force.drag);
 
 node.append("circle")
@@ -94,7 +94,7 @@ function showMostLoggedOn(){
             d3.select(this)
                 .data(test.nodes)
                 .attr("r", function(d) {
-                    alert(d.displayName);
+                    //alert(d.displayName);
                     return 10 + parseInt(d.logonCount);
                 });
     });
