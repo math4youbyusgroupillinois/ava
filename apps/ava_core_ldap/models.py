@@ -305,6 +305,7 @@ class ExportLDAP():
                 #        nodes.append(current)
                 #        elements.append(group)
         
+        results = {}
         results['elements'] = elements
         results['nodes'] = nodes
         return results        
