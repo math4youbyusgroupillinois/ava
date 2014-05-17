@@ -92,8 +92,8 @@ function showMostLoggedOn(){
     var svg = d3.select("#graph");
     //var node = svg.selectAll(".node").selectAll("circle")
     var node = svg.selectAll(".node")
-        .data()
-        .enter.append("circle")
+        .data(function(d) { return d; })
+        .enter.select("circle")
 
         //.data(function(d) { 
         //        if (d.node_type == 'user') {
