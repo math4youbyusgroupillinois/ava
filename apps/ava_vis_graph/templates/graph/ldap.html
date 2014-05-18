@@ -108,18 +108,17 @@ function showNeverExpires(data){
         .data(data.nodes);
 
     var node = svg.selectAll(".node").selectAll("circle")
-        .attr("class", function(d) {
+        .style("fill", function(d) {
               if (d.node_type == 'user') {
                     var cmp = d.accountExpires;
                     if (cmp.indexOf("9223372036854775807") > -1){
-                        alert(d.accountExpires);
-                        return "node nodered";
+                        return "red";
                     } else {
-                        return "node";
+                        return color(d.node_type);;
                     }
 
               } else {
-                    return "link";
+                    return color(d.node_type);;
               }
          });
     
