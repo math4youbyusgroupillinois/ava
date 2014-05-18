@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block mainpage %}
+   <h1 class="page-header">Active Directory Graph</h1>
    <div class="table-responsive">  
        <div id=graph></div>    
     </div>
@@ -89,11 +90,8 @@ function showMostLoggedOn(data){
 
     var node = svg.selectAll(".node").selectAll("circle")
         .attr("r", function(d) {
-              alert(d);
               if (d.node_type == 'user') {
-                    alert(d.logonCount); 
-                    //return 10 + parseInt(d.logonCount);
-                    return 10;
+                    return 10 + parseInt(d.logonCount);
               }
          });
     
@@ -117,7 +115,6 @@ function showNeverLoggedOn(){
 
 
 </script>
-   <h1 class="page-header">Active Directory Graph</h1>
    <a href="{{ link }}">{{ link_message }}</a>
    <a href="javascript:showMostLoggedOn(test);">Show Most Logged In</a>
    <a href="javascript:showNeverLoggedOn();">Show Never Logged In</a>
