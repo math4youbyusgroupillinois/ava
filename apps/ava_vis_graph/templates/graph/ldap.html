@@ -1,12 +1,5 @@
 {% extends 'base.html' %}
 {% block mainpage %}
-   <h1 class="page-header">Active Directory Graph</h1>
-   <a href="{{ link }}">{{ link_message }}</a>
-   <a href="javascript:showMostLoggedOn(myGraph);">Show Most Logged In</a>
-   <a href="javascript:showNeverLoggedOn();">Show Never Logged In</a>
-       <div class="table-responsive">  
-
-           <div id=graph></div>    
            <meta charset="utf-8">
 <style>
 
@@ -87,15 +80,13 @@ link.attr("x1", function(d) { return d.source.x; })
 
 node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
                                           });
-function showMostLoggedOn(myGraph){
-    var test = JSON.parse(myGraph);
-    var svg = d3.select("#graph");
+function showMostLoggedOn(data){
+    var svg = d3.select("#graph")
+        .data(data.nodes);
+
     var node = svg.selectAll(".node").selectAll("circle")
-        .data(myGraph.nodes)
-        .enter.append("circle")
-        .attr("r", function(d,i) {
+        .attr("r", function(d) {
               alert(d);
-              
               if (d.node_type == 'user') {
                     alert(d.logonCount); 
                     //return 10 + parseInt(d.logonCount);
@@ -123,6 +114,11 @@ function showNeverLoggedOn(){
 
 
 </script>
-</div>
-
+   <h1 class="page-header">Active Directory Graph</h1>
+   <a href="{{ link }}">{{ link_message }}</a>
+   <a href="javascript:showMostLoggedOn(test);">Show Most Logged In</a>
+   <a href="javascript:showNeverLoggedOn();">Show Never Logged In</a>
+   <div class="table-responsive">  
+       <div id=graph></div>    
+    </div>
 {% endblock %}
