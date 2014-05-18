@@ -12,6 +12,10 @@ stroke: #fff;
 stroke-width: 1.5px;
 }
 
+.nodered {
+    fill: red;
+}
+
 .node text {
 pointer-events: none;
 font: 10px sans-serif;
@@ -104,18 +108,18 @@ function showNeverExpires(data){
         .data(data.nodes);
 
     var node = svg.selectAll(".node").selectAll("circle")
-        .attr("fill", function(d) {
+        .attr("class", function(d) {
               if (d.node_type == 'user') {
                     var cmp = d.accountExpires;
                     if (cmp.indexOf("9223372036854775807") > -1){
                         alert(d.accountExpires);
-                        return "red";
+                        return "node nodered";
                     } else {
-                        return color(d.node_type);
+                        return "node";
                     }
 
               } else {
-                    return color(d.node_type);
+                    return "link";
               }
          });
     
