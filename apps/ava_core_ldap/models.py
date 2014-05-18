@@ -46,7 +46,7 @@ class ActiveDirectoryUser(TimeStampedModel):
     #identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
 
     def __unicode__(self):
-        return self.displayName or u''
+        return self.name or u''
 
     class Meta:
         unique_together = ('objectGUID','objectSid')
@@ -287,7 +287,7 @@ class ExportLDAP():
         nodes = []
         elements = []
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
-        fields = ['id','accountExpires','adminCount','displayName','isCriticalSystemObject','lastLogon','logonCount','pwdLastSet']
+        fields = ['id','accountExpires','adminCount','name','isCriticalSystemObject','lastLogon','logonCount','pwdLastSet']
         for user in ldap_users:
             elements.append(user)
             current = self.model_to_dict(user,fields)
