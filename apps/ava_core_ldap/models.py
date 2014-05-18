@@ -14,7 +14,7 @@ from ldap.cidict import cidict
 
 class ActiveDirectoryUser(TimeStampedModel):
     dn = models.CharField(max_length = 300)
-    accountExpire = models.CharField(max_length = 300)
+    accountExpires = models.CharField(max_length = 300)
     adminCount = models.CharField(max_length = 300)
     badPasswordTime = models.CharField(max_length = 300)
     badPwdCount = models.CharField(max_length = 300)
@@ -184,7 +184,7 @@ class ActiveDirectoryHelper():
 
     def getUsers(self,parameters,user):
         filter = '(objectclass=user)'
-        attrs = ['dn','accountExpire','adminCount','badPasswordTime','badPwdCount','cn','description','displayName','isCriticalSystemObject','lastLogoff','lastLogon','lastLogonTimestamp','logonCount','logonHours','name','objectGUID','objectSid','primaryGroupID','pwdLastSet','sAMAccountName','sAMAccountType','uSNChanged','uSNCreated','userAccountControl','whenChanged','whenCreated','memberOf','distinguishedName']
+        attrs = ['dn','accountExpires','adminCount','badPasswordTime','badPwdCount','cn','description','displayName','isCriticalSystemObject','lastLogoff','lastLogon','lastLogonTimestamp','logonCount','logonHours','name','objectGUID','objectSid','primaryGroupID','pwdLastSet','sAMAccountName','sAMAccountType','uSNChanged','uSNCreated','userAccountControl','whenChanged','whenCreated','memberOf','distinguishedName']
         results = self.search(parameters,filter,attrs)
         for  v in results:
             new_attrs = {}
@@ -287,7 +287,7 @@ class ExportLDAP():
         nodes = []
         elements = []
         ldap_users = ActiveDirectoryUser.objects.filter(queryParameters=parameters)
-        fields = ['id','accountExpire','adminCount','displayName','isCriticalSystemObject','lastLogon','logonCount','pwdLastSet']
+        fields = ['id','accountExpires','adminCount','displayName','isCriticalSystemObject','lastLogon','logonCount','pwdLastSet']
         for user in ldap_users:
             elements.append(user)
             current = self.model_to_dict(user,fields)

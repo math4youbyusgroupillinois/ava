@@ -106,8 +106,8 @@ function showNeverExpires(data){
     var node = svg.selectAll(".node").selectAll("circle")
         .attr("fill", function(d) {
               if (d.node_type == 'user') {
-                    alert(d.accountExpire)
-                    if (d.accountExpire == 'Never'){
+                    alert(d.accountExpires)
+                    if (d.acocuntExpires.indexOf("never") != -1 ){
                         return "red";
                     } else {
                         return color(d.node_type);
