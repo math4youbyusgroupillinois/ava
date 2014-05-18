@@ -107,13 +107,14 @@ function showNeverExpires(data){
         .attr("fill", function(d) {
               if (d.node_type == 'user') {
                     alert(d.accountExpires);
-                    if (d.acocuntExpires.indexOf("9223372036854775807") != -1 ){
+                    if (d.accountExpires.indexOf("9223372036854775807") != -1 ){
                         return "red";
                     } else {
                         return color(d.node_type);
                     }
 
               } else {
+                    alert(d.accountExpires);
                     return color(d.node_type);
               }
          });
