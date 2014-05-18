@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block mainpage %}
+   <div class="table-responsive">  
+       <div id=graph></div>    
+    </div>
            <meta charset="utf-8">
 <style>
 
@@ -118,7 +121,4 @@ function showNeverLoggedOn(){
    <a href="{{ link }}">{{ link_message }}</a>
    <a href="javascript:showMostLoggedOn(test);">Show Most Logged In</a>
    <a href="javascript:showNeverLoggedOn();">Show Never Logged In</a>
-   <div class="table-responsive">  
-       <div id=graph></div>    
-    </div>
 {% endblock %}
