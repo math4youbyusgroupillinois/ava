@@ -16,7 +16,7 @@
     
                 {% for ldap_user in ldap_user_list %}
                     <tr>
-                        <td>{{ ldap_user.displayName }}</td>
+                        <td>{{ ldap_user.name }}</td>
                         <td><a href="/ldap/user/{{ ldap_user.id }}/delete/">[delete]</td>
                     </tr>
                 {% endfor %}
