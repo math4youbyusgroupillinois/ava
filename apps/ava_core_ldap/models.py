@@ -2,7 +2,7 @@ from django.db import models
 from apps.ava_core.models import TimeStampedModel
 from apps.ava_core_org.models import Organisation
 #from apps.ava_core_identity.models import Identity
-
+from django.utils.html import escape
 from django.contrib.auth.models import User
 from ldap import *
 import ldif, sys, json
@@ -223,6 +223,7 @@ class ActiveDirectoryHelper():
 class LDAPSearchResult:
     dn = ''
     attrs = {}
+    page_size = 10
 
     def __init__(self, entry_tuple):
         (dn, attrs) = entry_tuple
@@ -291,6 +292,7 @@ class ExportLDAP():
         for user in ldap_users:
             elements.append(user)
             current = self.model_to_dict(user,fields)
+            current['name']=escape(current['name'])
             current['node_type'] = 'user'
             nodes.append(current)
         

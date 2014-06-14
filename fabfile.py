@@ -5,12 +5,13 @@ from fabric.api import lcd, local
 def quick():
     local('git add -p && git commit') # or local('hg add && hg commit')
     with lcd('/home/ladynerd/deploy/ava/'):
-        local('git pull /home/ladynerd/projects/ava/')
-
+        #local('git pull /home/ladynerd/projects/ava/')
+        local('rsync -avh /home/ladynerd/projects/ava/* .')
 
 def deploy():
     with lcd('/home/ladynerd/deploy/ava/'):
-        local('git pull /home/ladynerd/projects/ava/')
+        #local('git pull /home/ladynerd/projects/ava/')
+        local('rsync -avh /home/ladynerd/projects/ava/* .')
 
 
 def prepare_deployment():
