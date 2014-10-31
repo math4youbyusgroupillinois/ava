@@ -1,46 +1,96 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block mainpage %}
 
-<div class="page-header">
-    <h1>[organisation] {{ organisation.name }}
-<a href="/org/{{ organisation.id }}/update/">[update]</a>
-<a href="/org/{{ organisation.id }}/delete/">[delete]</a></h1>
-</div>
+    <div class="page-header">
 
-<h2>Summary</h2>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Organisation: {{ organisation.name }}</h3>
+        </div>
 
-{% if organisation.queryparameters_set %}
-        <div class="table-responsive">      
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>User DN</th>
-                        <th>Server</th>
-                        <th>Dump DN</th>
-                        <th># Users</th>
-                        <th># Groups</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for parameters in organisation.queryparameters_set.all %}
-                    <tr>
-                        <td>{{ parameters.user_dn }}</td>
-                        <td>{{ parameters.server }}</td>
-                        <td>{{ parameters.dump_dn }}</td>
-                        <td><a href="/ldap/{{ parameters.id }}/view/users/">{{ parameters.activedirectoryuser_set.count }}</a></td>
-                        <td><a href="/ldap/{{ parameters.id }}/view/groups/">{{ parameters.activedirectorygroup_set.count }}</a></td>
-                        <td><a href="/ldap/{{ parameters.id }}/getall/">[import]</a></td>
-                        <td><a href="/graph/ldap/{{ parameters.id }}/">[graph]</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>This organisation does not have any ldap configurations associated with it.</p>
-        {% endif %}
-        </div> <!-- end of table responsive -->
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center">
+                    <h2>Overview</h2>
+                </div>
+                <div class=" col-md-9 col-lg-9 ">
+                    <table class="table table-user-information">
+                        <tbody>
+                        <tr>
+                            <td>Name:</td>
+                            <td>{{ organisation.name }}</td>
+                        </tr>
+                        {% if organisation.industry %}
+                            <tr>
+                                <td>Industry:</td>
+                                <td>{{ organisation.industry }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if organisation.size %}
+                            <tr>
+                                <td>Size:</td>
+                                <td>{{ organisation.size }}</td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                    <a href="/org/{{ organisation.id }}/update/" class="btn btn-primary">update</a>
+                    <a href="/org/{{ organisation.id }}/delete/" class="btn btn-primary">delete</a>
+
+                </div> <!-- end of column -->
+                </div> <!-- end of row -->
+                 <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center">
+                    <h2>LDAP</h2>
+                </div>
+                <div class=" col-md-9 col-lg-9 ">
+
+                    {% if organisation.queryparameters_set %}
+                        <div class="table-responsive">
+                        {% for parameters in organisation.queryparameters_set.all %}
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <td>User DN</td>
+                                    <td>{{ parameters.user_dn }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Server</td>
+                                    <td>{{ parameters.server }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dump DN</td>
+                                    <td>{{ parameters.dump_dn }}</td>
+                                </tr>
+                                <tr>
+                                    <td># Users</td>
+                                    <td>
+                                        <a href="/ldap/{{ parameters.id }}/view/users/">{{ parameters.activedirectoryuser_set.count }}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td># Groups</td>
+                                    <td>
+                                        <a href="/ldap/{{ parameters.id }}/view/groups/">{{ parameters.activedirectorygroup_set.count }}</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <a href="/ldap/{{ parameters.id }}/getall/" class="btn btn-primary">Import users and
+                                groups</a>
+                            <a href="/graph/ldap/{{ parameters.id }}/" class="btn btn-primary">Generate graph</a>
+                        {% endfor %}
+                    {% else %}
+                        <p>This organisation does not have any ldap configurations associated with it.</p>
+                    {% endif %}
+                    </div> <!-- end of table responsive -->
+                </div>
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of panel body -->
+    </div> <!-- end of panel -->
 
 {% endblock %}
 

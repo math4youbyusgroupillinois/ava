@@ -56,7 +56,7 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = 'media/'
 MEDIA_URL = 'media/'
-STATIC_ROOT = 'static/'
+#STATIC_ROOT = 'static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"

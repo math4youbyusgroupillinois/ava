@@ -80,15 +80,17 @@ class OrganisationCreateView(CreateView):
 
 class OrganisationUpdateView(UpdateView):
     model = Organisation
-    template_name = 'org/organisation.html'
+    template_name = 'item.html'
     success_url = '/'
     form_class = OrganisationForm
+    page_title = 'Update organisation'
+    button_value = 'Save changes'
 
     def get_context_data(self, **kwargs):
-        context = super(OrganisationCreateView, self).get_context_data(**kwargs)
-        org_pk = self.request.session['organisation']
-        organisation = get_object_or_404(Organisation,pk=org_pk)
-        context['form'] = OrganisationForm(instance=organisation)
+        context = super(OrganisationUpdateView, self).get_context_data(**kwargs)
+        context['page_title'] = self.page_title
+        context['button_value'] = self.button_value
+        return context
 
 class OrganisationUnitUpdateView(CreateView):
     model=OrganisationUnit    
