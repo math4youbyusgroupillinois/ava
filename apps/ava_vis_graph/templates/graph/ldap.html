@@ -30,11 +30,16 @@ stroke-opacity: .6;
 }
 
 </style>
+
+  <a href="{{ link }}">{{ link_message }}</a>
+   <a href="javascript:showMostLoggedOn(test);">Show Most Logged In</a>
+   <a href="javascript:showNeverExpires(test);">Show Never Expires</a>
+    <a href="javascript:showUsers(test);">Show Users</a>
 <script>
 var myGraph ='{% autoescape off %} {{ json }}{% endautoescape %}';
 
-var width = 960,
-height = 500;
+var width = 1500,
+height = 1500;
 
 var color = d3.scale.category20();
 
@@ -102,6 +107,20 @@ function showMostLoggedOn(data){
          });
     
 }
+function showUsers(data){
+    var svg = d3.select("#graph")
+        .data(data.nodes);
+
+    var node = svg.selectAll(".node").selectAll("circle")
+        .attr("r", function(d) {
+              if (d.node_type == 'user') {
+                    return 0;
+                    } else {
+                    return 10;
+                    }
+         });
+
+}
 
 function showNeverExpires(data){
     var svg = d3.select("#graph")
@@ -126,7 +145,5 @@ function showNeverExpires(data){
 
 
 </script>
-   <a href="{{ link }}">{{ link_message }}</a>
-   <a href="javascript:showMostLoggedOn(test);">Show Most Logged In</a>
-   <a href="javascript:showNeverExpires(test);">Show Never Expires</a>
+
 {% endblock %}
