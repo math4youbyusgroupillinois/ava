@@ -1,0 +1,8 @@
+from django.forms import ModelForm, Form
+from apps.ava_test_email.models import *
+
+
+class EmailTestForm(ModelForm):
+    class Meta:
+        model = EmailTest
+        #fields = ('name',  'description', 'testtype', 'timingtype','targettype')

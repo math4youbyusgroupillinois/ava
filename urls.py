@@ -18,6 +18,9 @@ urlpatterns = patterns('',
     url(r'^people/', include('apps.ava_core_people.urls')),
     url(r'^org/', include('apps.ava_core_org.urls')),
     url(r'^graph/', include('apps.ava_vis_graph.urls')),
+    url(r'^test/', include('apps.ava_test.urls')),
+    #url(r'^test_email/', include('apps.ava_test_email.urls')),
+    #url(r'^test_twitter/', include('apps.ava_test_twitter.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 urlpatterns += dh5bp_urls
