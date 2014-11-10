@@ -16,7 +16,7 @@ class Test(TimeStampedModel):
 
 
 class TestType (ReferenceModel):
-    pass
+    url= models.TextField(max_length="50", null=False)
 
 class TimingType (ReferenceModel):
     pass

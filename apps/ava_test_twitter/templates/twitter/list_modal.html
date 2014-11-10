@@ -5,7 +5,7 @@
     <h4 class="modal-title" id="myModalLabel">{{ form_title }}</h4> 
 </div> 
 <div class="modal-body"> 
-    <form action="{% url 'test_new' %}" id="{{ form_id }}" method="post">
+    <form action="{% url 'twittertest_new' %}" id="{{ form_id }}" method="post">
             {% csrf_token %}
             {% bootstrap_form form %}
 
