@@ -102,6 +102,7 @@ LOCAL_APPS = (
     'apps.ava_test',
     'apps.ava_analyse',
     'apps.ava_test_email',
+    'apps.ava_test_twitter',
 #    'apps.ava_core_identity',
 )
 

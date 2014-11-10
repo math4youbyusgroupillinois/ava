@@ -3,10 +3,8 @@ from django.contrib.auth.models import User
 from apps.ava_core.models import TimeStampedModel,ReferenceModel
 from apps.ava_test.models import Test
 
-class EmailTest(TimeStampedModel):
-    test= models.ForeignKey('ava_test.Test', null=False)
-    user = models.ForeignKey(User)
-    testtype = models.ForeignKey('EmailTestType', null=False)
+class EmailTest(Test):
+    emailtesttype = models.ForeignKey('EmailTestType', null=False)
     fromaddr = models.EmailField(null=False)
     subject = models.TextField(max_length=200,null=False)
     body = models.TextField(max_length=2000,null=False)

@@ -6,7 +6,7 @@
 
     <div class="panel panel-info">
         <div class="panel-heading">
-            <h3 class="panel-title">Email Test: {{ emailtest.name }}</h3>
+            <h3 class="panel-title">Email Test: {{ test.name }}</h3>
         </div>
 
         <div class="panel-body">
@@ -19,42 +19,42 @@
                         <tbody>
                         <tr>
                             <td>Name:</td>
-                            <td>{{ emailtest.name }}</td>
+                            <td>{{ test.name }}</td>
                         </tr>
-                        {% if emailtest.fromaddr %}
+                        {% if test.fromaddr %}
                             <tr>
                                 <td>From Address:</td>
-                                <td>{{ emailtest.fromaddr }}</td>
+                                <td>{{ test.fromaddr }}</td>
                             </tr>
                         {% endif %}
-                        {% if emailtest.subject %}
+                        {% if test.subject %}
                             <tr>
                                 <td>Subject:</td>
-                                <td>{{ emailtest.subject }}</td>
+                                <td>{{ test.subject }}</td>
                             </tr>
                         {% endif %}
-                        {% if emailtest.body %}
+                        {% if test.body %}
                             <tr>
                                 <td>Message Body:</td>
-                                <td>{{ emailtest.body }}</td>
+                                <td>{{ test.body }}</td>
                             </tr>
                         {% endif %}
-                        {% if emailtest.messagetype %}
+                        {% if test.messagetype %}
                             <tr>
                                 <td>Message Type:</td>
-                                <td>{{ emailtest.messagetype }}</td>
+                                <td>{{ test.messagetype }}</td>
                             </tr>
                         {% endif %}
-                        {% if emailtest.testtype %}
+                        {% if test.testtype %}
                             <tr>
                                 <td>Test Type:</td>
-                                <td>{{ emailtest.testtype }}</td>
+                                <td>{{ test.testtype }}</td>
                             </tr>
                         {% endif %}
                         </tbody>
                     </table>
-                    <a href="/emailtest/{{ emailtest.id }}/update/" class="btn btn-primary">update</a>
-                    <a href="/emailtest/{{ emailtest.id }}/delete/" class="btn btn-primary">delete</a>
+                    <a href="/test/email/{{ test.id }}/update/" class="btn btn-primary">update</a>
+                    <a href="/test/email/{{ test.id }}/delete/" class="btn btn-primary">delete</a>
 
                 </div> <!-- end of column -->
 

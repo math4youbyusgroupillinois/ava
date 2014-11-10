@@ -3,6 +3,27 @@
 {% block mainpage %}
 
     <div class="page-header">
+    <div class="row">
+        <h3 class="text-center">What shall we do today?</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-lg-4 " align="center">
+            <h2>Know</h2>
+            <a href="/org/{{ organisation.id }}/view/"><button type="button" class="btn btn-primary btn-sm">View Organisation</button></a>
+            <img width="100" alt="" src="{% static 'images/largebinary.jpg'%}" class="img-circle">
+        </div>
+        <div class="col-md-4 col-lg-4 " align="center">
+            <h2>Test</h2>
+            <a href="/test/org/{{ organisation.id }}/" class="btn btn-primary">Test Organisation</a>
+            <img width="100" alt="" src="{% static 'images/largebinary.jpg'%}" class="img-circle">
+        </div>
+        <div class="col-md-4 col-lg-4 " align="center">
+            <h2>Analyse</h2>
+            <a href="/analyse/org/{{ organisation.id }}/view/" class="btn btn-primary">Analyse Organisation</a>
+            <img width="100" alt="" src="{% static 'images/largebinary.jpg'%}" class="img-circle">
+        </div>
+    </div>
+    </div>
 
     <div class="panel panel-info">
         <div class="panel-heading">

@@ -14,11 +14,11 @@
 
 {% if list %}
     <table style="margin-left:auto;margin-right:auto">
-    {% for emailtest in list %}
+    {% for test in list %}
     <tr>
-        <td class="left"><a href="/emailtest/{{ emailtest.id }}/view/">{{ emailtest.name }}</a></td>
-        <td><a href="/emailtest/{{ emailtest.id }}/update/">[update]</td>
-        <td><a href="/emailtest/{{ emailtest.id }}/delete/">[delete]</td>
+        <td class="left"><a href="/test/email/{{ test.id }}/view/">{{ test.name }}</a></td>
+        <td><a href="/test/email/{{ test.id }}/update/">[update]</td>
+        <td><a href="/test/email/{{ test.id }}/delete/">[delete]</td>
     </tr>
     {% endfor %}
     </table>
