@@ -37,29 +37,38 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Type</th>
                         <th>Name</th>
                         <th>Description</th>
-                        <th><form>
-                                <select name="new_test">
-                                    {% for module in test_modules %}
-                                        <option value="{{ module.url }}">Add new {{ module.name }} test</option>
-                                    {% endfor %}
-                                </select>
-                                <button type="submit" class="btn btn-primary"> Go </button>
-                            </form>
+                        <th>Timing</th>
+                        <th>Status</th>
+                        <th>
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="#"><i class="fa fa-plus fa-fw"></i>Add Test</a>
+                                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"  aria-expanded="false" href="#">
+                                        <span class="fa fa-caret-down"></span></a>
+                                          <ul class="dropdown-menu">
+                           {% for module in test_modules %}
+                                  <li><a href="{{ module.url }}"><i class="fa {{ module.icon }} fa-fw"></i> {{ module.name }}</a></li>
+                           {% endfor %}
+                                          </ul>
+                        </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
     {% for item in list %}
     <tr>
+        <td><i class="fa {{ item.testtype.icon }} }}"></i></td>
         <td>{{ item.name }}</td>
         <td>{{ item.description }}</td>
+        <td>{{ item.timingtype }}</td>
+        <td>{{ item.teststatus }}</td>
         <td>
 
-          <a href="/test/{{ item.id }}/view/"><button type="button" class="btn btn-primary btn-sm">View</button></a>
-          <a href="/test/{{ item.id }}/update/"><button type="button" class="btn btn-primary btn-sm">Update</button></a>
-          <a href="/test/{{ item.id }}/delete/"><button type="button" class="btn btn-primary btn-sm">Delete</button></a>
+          <a href="/test/{{ item.testtype|lower }}/{{ item.id }}/view/"><button type="button" class="btn btn-primary btn-sm">View</button></a>
+          <a href="/test/{{ item.testtype|lower }}/{{ item.id }}/update/"><button type="button" class="btn btn-primary btn-sm">Update</button></a>
+          <a href="/test/{{ item.testtype|lower }}/{{ item.id }}/delete/"><button type="button" class="btn btn-primary btn-sm">Delete</button></a>
     </tr>
     {% endfor %}
      </tbody>
