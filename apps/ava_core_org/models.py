@@ -4,13 +4,11 @@ from django.core.exceptions import ValidationError
 
 from django.contrib.auth.models import User
 from apps.ava_core.models import TimeStampedModel,ReferenceModel
-from apps.ava_core_people.models import Person
+from apps.ava_core_people.models import Person, Identifier
 from apps.ava_core_project.models import Project
 
 # CORE TABLES: TARGETS
 
-class OrganisationGroupType (ReferenceModel):
-    pass
 
 class Industry (ReferenceModel):
     pass
@@ -37,20 +35,48 @@ class OrganisationUnit (TimeStampedModel):
     office=models.ForeignKey('Office', null=True, blank=True)
     organisation = models.ForeignKey('Organisation', null=False)
     parent=models.ForeignKey('OrganisationUnit', null=True, blank=True);
-    #identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
-    
+
     def __unicode__(self):
         return self.name or u''
 
 class OrganisationGroup (TimeStampedModel):
+
+    AD = 'AD'
+    SOCIAL = 'SO'
+    PROJECT = 'PR'
+    WORKING = 'WG'
+    TEAM = 'TE'
+
+
+
+    GROUP_TYPE_CHOICES = (
+        (AD,  'Active Directory'),
+        (SOCIAL,  'Social Group'),
+        (PROJECT,  'Project'),
+        (WORKING, 'Working Group'),
+        (TEAM, 'Team'),
+
+    )
+
+
     name = models.CharField(max_length=100)
-    grouptype = models.ForeignKey('OrganisationGroupType', null=False)
+    grouptype = models.CharField(max_length=5,
+                            choices=GROUP_TYPE_CHOICES, default=AD,
+                                verbose_name='Group Type')
     organisation = models.ForeignKey('Organisation', null=False)
-    #identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
 
     def __unicode__(self):
         return self.name or u''
 
+class GroupIdentifier(TimeStampedModel):
+    group = models.ForeignKey(OrganisationGroup,null=False)
+    identifier = models.ForeignKey(Identifier, null=False)
+
+    def __unicode__(self):
+        return self.group.name +" -> " + self.identifier.identifier
+
+    class Meta:
+        unique_together = ("identifier", "group")
 
 class Office (TimeStampedModel):
     name = models.CharField(max_length=100)

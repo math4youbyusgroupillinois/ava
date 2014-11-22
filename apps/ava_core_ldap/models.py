@@ -1,6 +1,7 @@
 from django.db import models
 from apps.ava_core.models import TimeStampedModel
-from apps.ava_core_org.models import Organisation
+from apps.ava_core_org.models import Organisation, OrganisationGroup, GroupIdentifier
+from apps.ava_core_people.models import Identifier, Person
 #from apps.ava_core_identity.models import Identity
 from django.utils.html import escape
 from django.contrib.auth.models import User
@@ -94,10 +95,10 @@ class ActiveDirectoryHelper():
     def getConnection(self, parameters):
         try:
             connection = initialize(parameters.server)
-            print "user_dn = "+parameters.user_dn+" user_pw="+parameters.user_pw+"\n"
+            #print "user_dn = "+parameters.user_dn+" user_pw="+parameters.user_pw+"\n"
             connection.set_option(OPT_REFERRALS, 0)    
             connection.simple_bind_s(parameters.user_dn, parameters.user_pw)
-            print (connection.whoami_s())
+            #print (connection.whoami_s())
             return connection
 
         except LDAPError, e:
@@ -134,20 +135,21 @@ class ActiveDirectoryHelper():
         return res
     
     def getAll(self,parameters,user):
-        print "Getting groups"
+        #print "Getting groups"
         self.getGroups(parameters,user)
-        print "Getting users"
+        #print "Getting users"
         self.getUsers(parameters,user)
-        print "Getting groups"
+        #print "Getting groups"
         self.getGroups(parameters,user)
 
-    def getGroups(self,parameters,user):
+    def getGroups(self,parameters,user,organisation):
         filter = '(objectclass=group)'
         attrs = ['cn','distinguishedName','name','objectCategory','sAMAccountName','objectGUID','objectSid','member']
         results = self.search(parameters,filter,attrs)
         for  v in results:
             new_attrs = {}
             users = []
+            fishes = []
             new_attrs.update(v.get_attributes())
             for key, value in new_attrs.iteritems():
                 if len(value) >  0:
@@ -175,6 +177,7 @@ class ActiveDirectoryHelper():
             rows = ActiveDirectoryGroup.objects.filter(**new_attrs).count()
             if rows == 0:
                 ad_group = ActiveDirectoryGroup.objects.create(queryParameters=parameters,user=user,**new_attrs)
+                OrganisationGroup.objects.get_or_create(name=ad_group.cn, grouptype=OrganisationGroup.AD,organisation=organisation)
                 ad_group.member.add(*users)
                 ad_group.save()
 
@@ -189,6 +192,7 @@ class ActiveDirectoryHelper():
         for  v in results:
             new_attrs = {}
             groups = []
+            org_groups = []
             new_attrs.update(v.get_attributes())
             for key, value in new_attrs.iteritems():
                 if len(value) >  0:
@@ -216,6 +220,7 @@ class ActiveDirectoryHelper():
             rows = ActiveDirectoryUser.objects.filter(**new_attrs).count()
             if rows == 0:
                 ad_user = ActiveDirectoryUser.objects.create(queryParameters=parameters,user=user,**new_attrs)
+                Identifier.objects.get_or_create(identifier=ad_user.sAMAccountName, identifiertype=Identifier.UNAME)
                 ad_user.memberOf.add(*groups)
                 ad_user.save()
     

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from apps.ava_core.models import TimeStampedModel,ReferenceModel
 from apps.ava_test.models import Test
+from apps.ava_core_people.models import Identifier, Person
+
 
 class TwitterTest(Test):
     twittertesttype = models.ForeignKey('TwitterTestType', null=False)
@@ -11,6 +13,11 @@ class TwitterTest(Test):
 
     def __unicode__(self):
         return self.name or u''
+
+
+class TwitterTestTarget(TimeStampedModel):
+    twittertest=models.ForeignKey('TwitterTest', null=False)
+    target = models.ForeignKey('ava_core_people.Identifier', null=False)
 
 
 class TwitterTestType (ReferenceModel):

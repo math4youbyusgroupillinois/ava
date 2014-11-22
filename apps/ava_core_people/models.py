@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from apps.ava_core.models import TimeStampedModel
 from apps.ava_core_project.models import Project
-#from apps.ava_core_identity.models import Identity
+
 
 # CORE TABLES: TARGETS
 
@@ -16,7 +16,6 @@ class Person(TimeStampedModel):
     surname = models.CharField(max_length=75,validators=[validate_slug])
     user = models.ForeignKey(User)
     project = models.ForeignKey('ava_core_project.Project')
- #   identity = models.ForeignKey('ava_core_identity.Identity',null=True,blank=True)
 
     def __unicode__(self):
         return self.firstname+" "+self.surname or u''
@@ -31,25 +30,28 @@ class Identifier(TimeStampedModel):
     SKYPE = 'SKYPE'
     IP = 'IPADD'
     UNAME = 'UNAME'
+    TWITTER = 'TWITTER'
+
 
     IDENTIFIER_TYPE_CHOICES = (
         (EMAIL,  'Email Address'),
         (SKYPE,  'Skype ID'),
         (IP,  'IP Address'),
         (UNAME, 'Username'),
+        (TWITTER , 'Twitter ID'),
     )
 
     identifier = models.CharField(max_length=100)
     identifiertype = models.CharField(max_length=5,
                             choices=IDENTIFIER_TYPE_CHOICES, default=EMAIL,
                                 verbose_name='Identifier Type')
-    person = models.ForeignKey('Person', null=False)
+    person = models.ForeignKey('Person', null=True)
 
     class Meta:
         unique_together = ("identifier", "identifiertype","person")
 
 
-    def __unicode_(self):
+    def __unicode__(self):
         return self.identifier or u''
 
     def clean(self):
@@ -64,17 +66,18 @@ class Identifier(TimeStampedModel):
                 validate_ipv46_address(self.identifier)
             except ValidationError as e:
                 raise ValidationError('Identifier declared as IP ADDRESS but does not contain a valid ip4/ip6 address')
-        
+
         if self.identifiertype == 'UNAME' or self.identifiertype =='SKYPE':
             try:
                 validate_slug(self.identifier)
             except ValidationError as e:
                 raise ValidationError('Identifier declared as USERNAME/SKYPE but does not contain a username or skype identifier')
+
+        if self.identifiertype == 'TWITTER':
+            try:
+                validate_slug(self.identifier)
+            except ValidationError as e:
+                raise ValidationError('Identifier declared as Twitter ID but does not contain a valid twitter id')
         
 
-#class ExtendedProfile(TimeStampedModel):
-#    dob = models.DateField()
-#    person = models.OneToOneField('Person', null=False)
-#    title = models.CharField(max_length = 255)
-#    notes = models.TextField()
 

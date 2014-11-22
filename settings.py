@@ -116,6 +116,7 @@ THIRD_PARTY_APPS = (
     'ldap',
     'bootstrap3',
     'd3',
+    'shorturls',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -136,6 +137,11 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+SHORTEN_MODELS = {
+    'E': 'ava_test_email.EmailTest',
+    'T': 'ava_test_twitter.TwitterTest',
 }
 
 

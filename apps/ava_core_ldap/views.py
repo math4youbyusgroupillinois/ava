@@ -12,6 +12,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 from apps.ava_core_ldap.models import ActiveDirectoryUser, ActiveDirectoryGroup, QueryParameters, ActiveDirectoryHelper
 from apps.ava_core_ldap.forms import  QueryParametersForm
+from apps.ava_core_people.models import Identifier
+from apps.ava_core_org.models import GroupIdentifier, OrganisationGroup
 
 
 class ConfigurationIndexView(generic.ListView):
@@ -57,6 +59,7 @@ class ConfigurationItemView(generic.ListView):
             instance = get_object_or_404(QueryParameters, pk=config_pk)
             context['ldap_user_list'] = ActiveDirectoryUser.objects.filter(queryParameters=instance,user=self.request.user)
             context['ldap_group_list'] = ActiveDirectoryGroup.objects.filter(queryParameters=instance,user=self.request.user)
+
         return context
 
 class ConfigurationDetailView(generic.DetailView):
@@ -97,12 +100,31 @@ class ConfigurationGetAll(generic.ListView):
             instance = get_object_or_404(QueryParameters, pk=config_pk)
             adHelper = ActiveDirectoryHelper()
             adHelper.getUsers(instance,self.request.user)
-            adHelper.getGroups(instance,self.request.user)
+            adHelper.getGroups(instance,self.request.user,instance.organisation)
             adHelper.getUsers(instance,self.request.user)
              
         context['item_type'] = 'user'
+        ad_groups = ActiveDirectoryGroup.objects.filter(queryParameters=instance, user=self.request.user)
+
+        for adg in ad_groups:
+            try:
+                org_g = OrganisationGroup.objects.get(name=adg.cn)
+                groups = adg.member.all()
+                for g in groups:
+                    try:
+                        user = Identifier.objects.get(identifier=g.sAMAccountName,identifiertype=Identifier.UNAME)
+                        GroupIdentifier.objects.get_or_create(identifier=user, group=org_g)
+                    except Identifier.DoesNotExist:
+                        print " No such id :: " + g.sAMAccountName
+
+
+            except OrganisationGroup.DoesNotExist:
+                print "No such group :: " + adg.cn
+
         context['ldap_item_list'] = ActiveDirectoryUser.objects.filter(queryParameters=instance,user=self.request.user)
         return context
+
+
 
 class ConfigurationGetGroups(generic.ListView):
     model = ActiveDirectoryGroup
@@ -114,7 +136,7 @@ class ConfigurationGetGroups(generic.ListView):
         if config_pk:
             instance = get_object_or_404(QueryParameters, pk=config_pk)
             adHelper = ActiveDirectoryHelper()
-            adHelper.getGroups(instance,self.request.user)
+            adHelper.getGroups(instance,self.request.user,instance.organisation)
         
         context['item_type'] = 'group'
         context['ldap_item_list'] = ActiveDirectoryGroup.objects.filter(queryParameters=instance,user=self.request.user)
