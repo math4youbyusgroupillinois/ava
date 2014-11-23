@@ -185,7 +185,7 @@ class ActiveDirectoryHelper():
         s = ['\\%02X' % ord(x) for x in val] 
         return ''.join(s)
 
-    def getUsers(self,parameters,user):
+    def getUsers(self,parameters,user,organisation):
         filter = '(objectclass=user)'
         attrs = ['dn','accountExpires','adminCount','badPasswordTime','badPwdCount','cn','description','displayName','isCriticalSystemObject','lastLogoff','lastLogon','lastLogonTimestamp','logonCount','logonHours','name','objectGUID','objectSid','primaryGroupID','pwdLastSet','sAMAccountName','sAMAccountType','uSNChanged','uSNCreated','userAccountControl','whenChanged','whenCreated','memberOf','distinguishedName']
         results = self.search(parameters,filter,attrs)
@@ -220,8 +220,15 @@ class ActiveDirectoryHelper():
             rows = ActiveDirectoryUser.objects.filter(**new_attrs).count()
             if rows == 0:
                 ad_user = ActiveDirectoryUser.objects.create(queryParameters=parameters,user=user,**new_attrs)
-                Identifier.objects.get_or_create(identifier=ad_user.sAMAccountName, identifiertype=Identifier.UNAME)
-                Identifier.objects.get_or_create(identifier=ad_user.sAMAccountName+"@avasecure.com", identifiertype=Identifier.EMAIL)
+                firstname = ""
+                surname = ""
+                if " " in ad_user.displayName:
+                    bits = str.split(ad_user.displayName," ")
+                    firstname=bits[0]
+                    surname=bits[1]
+                obj, created = Person.objects.get_or_create(firstname=firstname,surname=surname,user=user,organisation=organisation)
+                Identifier.objects.get_or_create(identifier=ad_user.sAMAccountName, identifiertype=Identifier.UNAME,person=obj)
+                Identifier.objects.get_or_create(identifier=ad_user.sAMAccountName+"@avasecure.com", identifiertype=Identifier.EMAIL, person=obj)
                 ad_user.memberOf.add(*groups)
                 ad_user.save()
     

@@ -24,14 +24,54 @@
         </div>
     </div>
     </div>
-
     <div class="panel panel-info">
         <div class="panel-heading">
-            <h3 class="panel-title">Test: {{ test.org.name }}</h3>
+            <h3 class="panel-title">Testing Summary</h3>
+        </div>
+
+ <div class="panel-body">
+            <div class="row">
+
+                <div class="col-md-2 col-lg-2" align="center">
+                    <i class="fa fa-star fa-5x"></i>
+                    <h2>New Tests</h2>
+                    <p>{{ tests_new }}</p>
+                </div>
+                <div class="col-md-2 col-lg-2" align="center">
+                    <i class="fa fa-spinner fa-5x"></i>
+                    <h2>Running</h2>
+                    <p>{{ tests_running }}</p>
+                </div>
+                <div class="col-md-2 col-lg-2" align="center">
+                    <i class="fa fa-check-square fa-5x"></i>
+                    <h2>Completed</h2>
+                    <p>{{ tests_complete }}</p>
+                </div>
+                <div class="col-md-2 col-lg-2" align="center">
+                    <i class="fa fa-history fa-5x"></i>
+                    <h2>Scheduled</h2>
+                    <p>{{ tests_scheduled }}</p>
+                </div>
+                <div class="col-md-2 col-lg-2" align="center">
+                    <i class="fa fa-exclamation-circle fa-5x"></i>
+                    <h2>Errors</h2>
+                    <p>{{ tests_error }}</p>
+                </div>
+                <div class="col-md-2 col-lg-2" align="center">
+                    <i class="fa fa-refresh fa-5x"></i>
+                    <h2>Recurring</h2>
+                    <p>{{ tests_recurring }}</p>
+                </div>
+            </div>
+
+        </div> <!-- end of panel -->
+</div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Current Tests</h3>
         </div>
 
         <div class="panel-body">
-<h2 class="sub-header">Current Tests</h2>
 
 {% if list %}
             <table class="table table-striped">

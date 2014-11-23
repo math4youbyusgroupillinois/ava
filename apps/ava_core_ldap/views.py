@@ -83,7 +83,7 @@ class ConfigurationGetUsers(generic.ListView):
         if config_pk:
             instance = get_object_or_404(QueryParameters, pk=config_pk)
             adHelper = ActiveDirectoryHelper()
-            adHelper.getUsers(instance,self.request.user)
+            adHelper.getUsers(instance,self.request.user,instance.organisation)
              
         context['item_type'] = 'user'
         context['ldap_item_list'] = ActiveDirectoryUser.objects.filter(queryParameters=instance,user=self.request.user)
@@ -99,9 +99,9 @@ class ConfigurationGetAll(generic.ListView):
         if config_pk:
             instance = get_object_or_404(QueryParameters, pk=config_pk)
             adHelper = ActiveDirectoryHelper()
-            adHelper.getUsers(instance,self.request.user)
+            adHelper.getUsers(instance,self.request.user,instance.organisation)
             adHelper.getGroups(instance,self.request.user,instance.organisation)
-            adHelper.getUsers(instance,self.request.user)
+            adHelper.getUsers(instance,self.request.user,instance.organisation)
              
         context['item_type'] = 'user'
         ad_groups = ActiveDirectoryGroup.objects.filter(queryParameters=instance, user=self.request.user)

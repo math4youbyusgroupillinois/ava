@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
 from apps.ava_core.models import TimeStampedModel
-from apps.ava_core_project.models import Project
+import apps.ava_core_org.models
 
 
 # CORE TABLES: TARGETS
@@ -15,7 +15,7 @@ class Person(TimeStampedModel):
     firstname = models.CharField(max_length=75,validators=[validate_slug])
     surname = models.CharField(max_length=75,validators=[validate_slug])
     user = models.ForeignKey(User)
-    project = models.ForeignKey('ava_core_project.Project')
+    organisation = models.ForeignKey('ava_core_org.Organisation')
 
     def __unicode__(self):
         return self.firstname+" "+self.surname or u''

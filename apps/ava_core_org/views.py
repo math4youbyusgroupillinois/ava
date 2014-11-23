@@ -25,7 +25,22 @@ class OrganisationDetailView(generic.DetailView):
     model = Organisation
     context_object_name = 'organisation'
     template_name = 'org/view.html'
-    
+
+    def get_context_data(self, **kwargs):
+        context = super(OrganisationDetailView, self).get_context_data(**kwargs)
+
+        pk = self.kwargs.get('pk')
+        id_count=0
+        organisation = get_object_or_404(Organisation, pk=pk)
+        people = Person.objects.filter(organisation=organisation)
+        for p in people:
+            fish = p.identifier_set.all().count()
+            id_count = id_count + fish
+
+        context['org_identifier_count'] = id_count
+
+        return context
+
     def get(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
         if pk:
