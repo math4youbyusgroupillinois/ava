@@ -221,6 +221,7 @@ class ActiveDirectoryHelper():
             if rows == 0:
                 ad_user = ActiveDirectoryUser.objects.create(queryParameters=parameters,user=user,**new_attrs)
                 Identifier.objects.get_or_create(identifier=ad_user.sAMAccountName, identifiertype=Identifier.UNAME)
+                Identifier.objects.get_or_create(identifier=ad_user.sAMAccountName+"@avasecure.com", identifiertype=Identifier.EMAIL)
                 ad_user.memberOf.add(*groups)
                 ad_user.save()
     

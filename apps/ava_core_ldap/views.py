@@ -114,6 +114,8 @@ class ConfigurationGetAll(generic.ListView):
                     try:
                         user = Identifier.objects.get(identifier=g.sAMAccountName,identifiertype=Identifier.UNAME)
                         GroupIdentifier.objects.get_or_create(identifier=user, group=org_g)
+                        user1 = Identifier.objects.get(identifier=g.sAMAccountName+"@avasecure.com",identifiertype=Identifier.EMAIL)
+                        GroupIdentifier.objects.get_or_create(identifier=user1, group=org_g)
                     except Identifier.DoesNotExist:
                         print " No such id :: " + g.sAMAccountName
 
