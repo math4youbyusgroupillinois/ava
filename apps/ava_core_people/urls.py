@@ -5,9 +5,10 @@ from apps.ava_core_people import views
 
 urlpatterns = patterns('',
     
-    #url(r'^$', login_required(views.PersonIndexView.as_view()), name='index'),
+    url(r'^$', login_required(views.PersonIndexView.as_view()), name='index'),
     #url(r'^(?P<pk>\d+)/$', login_required(views.PersonIndexView.as_view()), name='people'),
     url(r'^(?P<pk>\d+)/view/$', login_required(views.PersonDetailView.as_view()), name='people_view'),
+    url(r'^(?P<pk>\d+)/idview/$', login_required(views.PersonIDView.as_view()), name='people_id_view'),
     url(r'^new/$',login_required(views.PersonCreateView.as_view()),name='people_new'),
     url(r'^search/', login_required(include('haystack.urls'))),
     url(r'^(?P<pk>\d+)/update/$', login_required(views.PersonUpdateView.as_view()), name='people_update'),

@@ -19,6 +19,11 @@ class TwitterTestTarget(TimeStampedModel):
     twittertest=models.ForeignKey('TwitterTest', null=False)
     target = models.ForeignKey('ava_core_people.Identifier', null=False)
 
+    class Meta:
+        unique_together = ("twittertest", "target")
+
+    def __unicode__(self):
+        return self.target or u''
 
 class TwitterTestType (ReferenceModel):
     pass

@@ -6,7 +6,7 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 
 from apps.ava_core_people.models import Person, Identifier
-from apps.ava_core_project.models import Project
+from apps.ava_core_org.models import Organisation
 from apps.ava_core_people.forms import IdentifierFormSet, PersonForm
 
 
@@ -17,6 +17,12 @@ class PersonIndexView(generic.ListView):
     def get_queryset(self):
         return Person.objects.filter(user=self.request.user)
 
+class PersonIDView(generic.ListView):
+    template_name = 'people/index.html'
+    context_object_name = 'people_list'
+
+    def get_queryset(self):
+        return Person.objects.filter(user=self.request.user)
 
 class PersonDetailView(generic.DetailView):
     model = Person
@@ -114,12 +120,13 @@ class PersonCreateView(CreateView):
             return self.form_invalid(form, identifier_form)
 
     def form_valid(self, form, identifier_form):
-        project_id = self.request.session['project']
-        if project_id:
-            project = get_object_or_404(Project, pk=project_id)
+        org_id = self.request.session['organisation']
+
+        if org_id:
+            organisation = get_object_or_404(Organisation,pk=org_id)
             self.object = form.save(commit=False)
             self.object.user = self.request.user
-            self.object.project = project
+            self.object.organisation = organisation
             self.object.save()
             identifier_form.save()
             return HttpResponseRedirect(self.get_success_url())

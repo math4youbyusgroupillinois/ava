@@ -42,7 +42,7 @@ class Identifier(TimeStampedModel):
     )
 
     identifier = models.CharField(max_length=100)
-    identifiertype = models.CharField(max_length=5,
+    identifiertype = models.CharField(max_length=7,
                             choices=IDENTIFIER_TYPE_CHOICES, default=EMAIL,
                                 verbose_name='Identifier Type')
     person = models.ForeignKey('Person', null=True)

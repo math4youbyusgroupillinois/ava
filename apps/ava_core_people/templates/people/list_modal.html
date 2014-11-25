@@ -1,16 +1,11 @@
-{% extends 'org_base.html' %}
 {% load bootstrap3 %}
-{% load staticfiles %}
-{% block mainpage %}
 
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">Add new person</h3>
-        </div>
-
-        <div class="panel-body">
-
- <form action="" id="" method="post">
+<div class="modal-header"> 
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title" id="myModalLabel">{{ form_title }}</h4> 
+</div> 
+<div class="modal-body"> 
+    <form action="{% url 'project_new' %}" id="{{ form_id }}" method="post"
 
     <h3>Basic Details</h3>
             {% csrf_token %}
@@ -47,7 +42,8 @@
     {% endbuttons %}
 
     </form>
-
 </div>
-
-{% endblock %}
+<script> 
+    var form_options = { target: '#myModal', success: function() { } };
+    $('#new_list_form').ajaxForm(form_options); 
+</script> 

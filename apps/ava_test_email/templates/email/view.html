@@ -51,10 +51,23 @@
                                 <td>{{ test.testtype }}</td>
                             </tr>
                         {% endif %}
+                        {% if test.emailtesttarget_set.count > 0 %}
+                            <tr>
+                                <td>Test Targets:</td>
+                                <td><ul>
+                                    {% for target in test.emailtesttarget_set.all %}
+                                        <li>{{ target.target.identifier }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endif %}
                         </tbody>
                     </table>
                     <a href="/test/email/{{ test.id }}/update/" class="btn btn-primary">update</a>
                     <a href="/test/email/{{ test.id }}/delete/" class="btn btn-primary">delete</a>
+
+
 
                 </div> <!-- end of column -->
 

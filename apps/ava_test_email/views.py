@@ -6,8 +6,9 @@ from django.http import HttpResponseRedirect
 
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.models import User
-from apps.ava_test_email.models import EmailTest
-from apps.ava_test_email.forms import  EmailTestForm
+from apps.ava_test_email.models import EmailTest, EmailTestTarget
+from apps.ava_test_email.forms import  EmailTestForm, EmailTargetForm
+from apps.ava_core_people.models import Person, Identifier
 
 
 
@@ -22,7 +23,7 @@ class EmailTestIndexView(generic.ListView):
 class EmailTestDetailView(generic.DetailView):
     model = EmailTest
     context_object_name = 'test'
-    template_name = 'email/vieworg.html'
+    template_name = 'email/view.html'
 
     def get(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
@@ -56,7 +57,22 @@ class EmailTestCreateView(CreateView):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
+        self.add_targets()
         return HttpResponseRedirect(self.get_success_url())
+
+    def add_targets(self):
+        test = self.object
+        organisation = test.org
+        people = organisation.person_set.all()
+        for p in people:
+            ids = p.identifier_set.all()
+            for i in ids:
+                if i.identifiertype == Identifier.EMAIL:
+                    obj, created = EmailTestTarget.objects.get_or_create(target=i,emailtest=test)
+                    test = EmailTestTarget
+        return "OK"
+
+    #i#def generate_token(self):
 
 
 class EmailTestUpdateView(UpdateView):
@@ -72,4 +88,5 @@ class EmailTestUpdateView(UpdateView):
         context['page_title'] = self.page_title
         context['button_value'] = self.button_value
         return context
+
 

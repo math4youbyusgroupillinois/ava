@@ -60,7 +60,7 @@ class OrganisationGroup (TimeStampedModel):
 
 
     name = models.CharField(max_length=100)
-    grouptype = models.CharField(max_length=5,
+    grouptype = models.CharField(max_length=7,
                             choices=GROUP_TYPE_CHOICES, default=AD,
                                 verbose_name='Group Type')
     organisation = models.ForeignKey('Organisation', null=False)
@@ -118,7 +118,7 @@ class OrganisationIdentifier(TimeStampedModel):
 class Employee(TimeStampedModel):
     person = models.ForeignKey('ava_core_people.Person', null=False)
     organisationunit = models.ForeignKey('OrganisationUnit', null=True, blank=True)
-    organisation = models.ForeignKey('Organisation', null=False) 
+    organisation = models.ForeignKey('Organisation', null=False)
     office = models.ForeignKey('Office', null=True, blank=True)
     group = models.ManyToManyField('OrganisationGroup',null=True, blank=True)
 
