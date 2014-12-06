@@ -4,6 +4,24 @@ import socket
 import re
 import time
 import psycopg2
+import datetime
+
+def dbwrite(token, useragent):
+	dbname="ava"
+	dbuser="ava"
+	dbpass="algernon"
+
+	conn = psycopg2.connect(host="127.0.0.1",database=dbname, user=dbuser, password=dbpass)
+	cur = conn.cursor()
+
+	cur.execute(
+    		"insert into ava_test_testresult (created, modified, token, ua) values (%s,%s,%s, %s)",
+		(datetime.datetime.now(), datetime.datetime.now(), token, useragent))
+
+	conn.commit()
+	cur.close
+	conn.close()
+
 
 # Standard socket stuff:
 host = ''  # do we need socket.gethostname() ?
@@ -53,21 +71,4 @@ Golly darn and dang dabbit
         csock.sendall("HTTP/1.0 404 Not Found\r\n")
     
 csock.close()
-
-def dbwrite(token, useragent):
-	dbname="ava"
-	dbuser="ava"
-	dbpass="algernon"
-
-	conn = psycopg2.connect(database=dbname, user=dbuser, password=dbpass)
-	cur = conn.cursor()
-
-	cur.execute(
-    		"insert into TABLENAME (token, ua) values (%s, %s)",
-		(token, useragent))
-
-	conn.commit()
-	cur.close
-	conn.close()
-
 

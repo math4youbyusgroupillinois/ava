@@ -95,10 +95,10 @@ class ActiveDirectoryHelper():
     def getConnection(self, parameters):
         try:
             connection = initialize(parameters.server)
-            #print "user_dn = "+parameters.user_dn+" user_pw="+parameters.user_pw+"\n"
+            print "user_dn = "+parameters.user_dn+" user_pw="+parameters.user_pw+"\n"
             connection.set_option(OPT_REFERRALS, 0)    
             connection.simple_bind_s(parameters.user_dn, parameters.user_pw)
-            #print (connection.whoami_s())
+            print (connection.whoami_s())
             return connection
 
         except LDAPError, e:

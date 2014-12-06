@@ -10,6 +10,7 @@ from apps.ava_test_email.models import EmailTest, EmailTestTarget
 from apps.ava_test_email.forms import  EmailTestForm, EmailTargetForm
 from apps.ava_core_people.models import Person, Identifier
 
+from django.core.mail import send_mail
 
 
 class EmailTestIndexView(generic.ListView):
@@ -90,3 +91,7 @@ class EmailTestUpdateView(UpdateView):
         return context
 
 
+class EmailSendEmailView(generic.View):
+
+    def get(self, request, *args, **kwargs):
+        send_mail('Subject here', 'Here is the message.', 'test@avasecure.com',    ['laura.d.bell@gmail.com'], fail_silently=False)

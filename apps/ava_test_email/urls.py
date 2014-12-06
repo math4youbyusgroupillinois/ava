@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^new/$',login_required(views.EmailTestCreateView.as_view()),name='emailtest_new'),
     url(r'^(?P<pk>\d+)/update/$', login_required(views.EmailTestUpdateView.as_view()), name='emailtest_update'),
     url(r'^(?P<pk>\d+)/delete/$', login_required(views.EmailTestDeleteView.as_view()), name='emailtest_delete'),
+    url(r'^send/$', login_required(views.EmailSendEmailView.as_view()), name='emailsend'),
 )

@@ -42,5 +42,9 @@ class TestType (ReferenceModel):
 class TimingType (ReferenceModel):
     icon= models.CharField(max_length=50, null=True)
 
+class TestResult (TimeStampedModel):
+    token= models.CharField(max_length=8)
+    ua = models.TextField()
+
 
 

@@ -145,6 +145,12 @@ SHORTEN_MODELS = {
 }
 
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'test@avasecure.com'
+EMAIL_HOST_PASSWORD = 'ylFCGs5Ih#5T19a'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
 
