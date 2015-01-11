@@ -1,6 +1,5 @@
 
 
-> ![AVA - Protect your people](http://avasecure.com/img/ava_logo_xsmall.png)
 > Visit our homepage at [http://avasecure.com](http://avasecure.com)
 
 ### We build secure people
@@ -26,7 +25,7 @@ Eventually there may be paid services or componants based around AVA. The core w
 The AVA core code base will become open source and public at the end of March 2015.
 
 ### AVA is looking for collaborators
-We are on the look out for testers, django/python developers and UX people to help make AVA awesome. If you have some spare cycles and want to contribute. Email : contribute@avasecure.com with details of your skills and availablity.
+We are on the look out for testers, django/python developers and UX people to help make AVA awesome. If you have some spare cycles and want to contribute. Email : hello@avasecure.com with details of your skills and availablity.
 
 ### Authors and Contributors
 AVA is the work of Laura Bell (@lady_nerd on Twitter) and her company, [SafeStack](http://safestack.io) - a specialist New Zealand based application security firm.
