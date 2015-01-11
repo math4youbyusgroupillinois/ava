@@ -5,7 +5,7 @@ from apps.ava_test_email import views
 
 urlpatterns = patterns('',
     
-    url(r'^$', login_required(views.EmailTestIndexView.as_view()), name='index'),
+    url(r'^$', login_required(views.EmailTestIndexView.as_view()), name='emailtestindex'),
     url(r'^(?P<pk>\d+)/$', login_required(views.EmailTestIndexView.as_view()), name='emailtest'),
     url(r'^(?P<pk>\d+)/view/$', login_required(views.EmailTestDetailView.as_view()), name='emailtest_view'),
     url(r'^new/$',login_required(views.EmailTestCreateView.as_view()),name='emailtest_new'),

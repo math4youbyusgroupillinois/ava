@@ -3,6 +3,7 @@ from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.models import User
@@ -92,6 +93,8 @@ class EmailTestUpdateView(UpdateView):
 
 
 class EmailSendEmailView(generic.View):
+    success_url = '/test/email/'
 
     def get(self, request, *args, **kwargs):
         send_mail('Subject here', 'Here is the message.', 'test@avasecure.com',    ['laura.d.bell@gmail.com'], fail_silently=False)
+        return HttpResponseRedirect(reverse('emailtestindex'))
