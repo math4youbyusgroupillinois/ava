@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.models import User
+from apps.ava_core_org.models import Organisation
 from apps.ava_test_email.models import EmailTest, EmailTestTarget
 from apps.ava_test_email.forms import  EmailTestForm, EmailTargetForm
 from apps.ava_core_people.models import Person, Identifier
@@ -96,5 +97,25 @@ class EmailSendEmailView(generic.View):
     success_url = '/test/email/'
 
     def get(self, request, *args, **kwargs):
-        send_mail('Subject here', 'Here is the message.', 'test@avasecure.com',    ['laura.d.bell@gmail.com'], fail_silently=False)
+        pk = request.session['test']
+        org_pk = request.session['organisation']
+        email = get_object_or_404(EmailTest, pk=pk)
+        org = get_object_or_404(Organisation, pk=org_pk)
+        targets = []
+        people = Person.objects.filter(organisation=org)
+        for p in people:
+            identifiers = p.identifier_set.all()
+            for i in identifiers:
+                if i.identifiertype == Identifier.EMAIL:
+                    targets.append("'"+i.identifier+"'")
+
+        # currently sends to all people in organisation - this will need addressing
+
+        targetString = ",".join(targets)
+        targetString = '[' + targetString + ']'
+
+        print "Targets:: " + targetString
+
+        #send_mail(email.subject, email.body, email.fromaddr, targetString, fail_silently=False)
+        send_mail(email.subject, email.body, 'laura@trustme.io', ['laura@safestack.io','hello@avasecure.com'], fail_silently=False)
         return HttpResponseRedirect(reverse('emailtestindex'))

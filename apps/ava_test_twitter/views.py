@@ -8,7 +8,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.models import User
 from apps.ava_test_twitter.models import TwitterTest
 from apps.ava_test_twitter.forms import  TwitterTestForm
-
+#from twitter import *
 
 
 class TwitterTestIndexView(generic.ListView):
@@ -73,3 +73,28 @@ class TwitterTestUpdateView(UpdateView):
         context['button_value'] = self.button_value
         return context
 
+class TwitterTestSendTweetView(generic.View):
+    success_url = '/test/twitter/'
+
+    def get(self, request, *args, **kwargs):
+        pk = request.session['test']
+        org_pk = request.session['organisation']
+        #twitter = get_object_or_404(TwitterTest, pk=pk)
+        org = get_object_or_404(Organisation, pk=org_pk)
+        targets = []
+
+
+        #it = Twitter(auth=OAuth(token,  token_key, xconDNuSAn4dgwL8Lks15RgunqkfnTfVAo0Smejok4V023iuHG, ppIdalf76qTZdkmndPdsDA5Tg))
+
+        people = Person.objects.filter(organisation=org)
+        for p in people:
+            identifiers = p.identifier_set.all()
+            for i in identifiers:
+                if i.identifiertype == Identifier.TWITTER:
+                    targets.append("'"+i.identifier+"'")
+
+        # currently sends to all people in organisation - this will need addressing
+
+        #send_mail(email.subject, email.body, email.fromaddr, targetString, fail_silently=False)
+        send_mail(email.subject, email.body, 'laura@trustme.io', ['laura@safestack.io','hello@avasecure.com'], fail_silently=False)
+        return HttpResponseRedirect(reverse('emailtestindex'))

@@ -103,20 +103,16 @@ LOCAL_APPS = (
     'apps.ava_analyse',
     'apps.ava_test_email',
     'apps.ava_test_twitter',
-#    'apps.ava_core_identity',
 )
 
 THIRD_PARTY_APPS = (
-    'south',
     'dh5bp',
     'haystack',
-    'localflavor',
-    'django_localflavor_nz',
-    'country_dialcode',
     'ldap',
     'bootstrap3',
     'd3',
     'shorturls',
+    'djrill',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -145,11 +141,7 @@ SHORTEN_MODELS = {
 }
 
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'test@avasecure.com'
-EMAIL_HOST_PASSWORD = '4*oG8hGyQOLxwUPRDnqn'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+
 
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
