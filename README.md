@@ -22,10 +22,9 @@ If the terms of GPL are not suitable to your environment, please get in touch. W
 
 Eventually there may be paid services or componants based around AVA. The core will always remain free and open source for those who want to run it internally.
 
-The AVA core code base will become open source and public at the end of March 2015.
 
 ### AVA is looking for collaborators
-We are on the look out for testers, django/python developers and UX people to help make AVA awesome. If you have some spare cycles and want to contribute. Email : hello@avasecure.com with details of your skills and availablity.
+We are on the look out for testers, django/python developers, documentation folk, graphics wizards and UX people to help make AVA awesome. If you have some spare cycles and want to contribute get stuck in.
 
 ### Authors and Contributors
 AVA is the work of Laura Bell (@lady_nerd on Twitter) and her company, [SafeStack](http://safestack.io) - a specialist New Zealand based application security firm.
