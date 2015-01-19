@@ -11,4 +11,6 @@ urlpatterns = patterns('',
     url(r'^new/$',login_required(views.TwitterTestCreateView.as_view()),name='twittertest_new'),
     url(r'^(?P<pk>\d+)/update/$', login_required(views.TwitterTestUpdateView.as_view()), name='twittertest_update'),
     url(r'^(?P<pk>\d+)/delete/$', login_required(views.TwitterTestDeleteView.as_view()), name='twittertest_delete'),
-)
+    url(r'^send/$', login_required(views.TwitterTestSendTweetView.as_view()), name='twittersend'),
+
+    )

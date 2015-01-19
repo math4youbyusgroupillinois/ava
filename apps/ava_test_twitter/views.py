@@ -95,6 +95,12 @@ class TwitterTestSendTweetView(generic.View):
 
         # currently sends to all people in organisation - this will need addressing
 
-        #send_mail(email.subject, email.body, email.fromaddr, targetString, fail_silently=False)
-        send_mail(email.subject, email.body, 'laura@trustme.io', ['laura@safestack.io','hello@avasecure.com'], fail_silently=False)
+        #twitter = Twython(APP_KEY, APP_SECRET,
+                 # OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
+
+        twitter = Twython('1JMWxaYJ6nwHPMdnr3Oga4exc', 'OFLD3aEvwgfdYyIvo1ql1pA8YSSzVPNhtd1wHrGahl988lbV2u',
+                  '2981043486-0a3rXFy5mC99PMaKzPRy73F8uFQyVxVhUQnmAEO', 'DHVSBkipAOiyIW2ukHifAXM2E7ikFTSSyUuWS3ow5uSoz')
+
+        twitter.update_status(status='Testing')
+
         return HttpResponseRedirect(reverse('emailtestindex'))

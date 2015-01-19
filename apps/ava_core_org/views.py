@@ -51,14 +51,14 @@ class OrganisationDetailView(generic.DetailView):
 class OrganisationDeleteView(DeleteView):
     model = Organisation
     template_name = 'confirm_delete.html'
-    success_url = '/org/'
+    success_url = '/'
 
 
 class OrganisationCreateView(CreateView):
     model = Organisation
     form_class = OrganisationForm
     template_name = 'org/organisation.html'
-    success_url = '/org/'
+    success_url = '/'
 
     
     def post(self, request, *args, **kwargs):

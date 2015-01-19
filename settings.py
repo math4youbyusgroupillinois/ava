@@ -111,8 +111,8 @@ THIRD_PARTY_APPS = (
     'ldap',
     'bootstrap3',
     'd3',
-    'shorturls',
     'djrill',
+    'twython',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS

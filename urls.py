@@ -22,6 +22,5 @@ urlpatterns = patterns('',
     url(r'^test/email/', include('apps.ava_test_email.urls')),
     url(r'^test/twitter/', include('apps.ava_test_twitter.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^oauth/', include('apps.twython_django_oauth.urls')),
 )
 urlpatterns += dh5bp_urls
